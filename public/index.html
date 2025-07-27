@@ -54,6 +54,18 @@
       border-radius: 8px;
       border: none;
     }
+    textarea {
+      width: 90%;
+      height: 250px;
+      margin-top: 20px;
+      padding: 10px;
+      background: #111;
+      color: #00f0ff;
+      border: 1px solid #00f0ff;
+      border-radius: 10px;
+      font-size: 14px;
+      resize: none;
+    }
     p {
       font-size: 14px;
       color: #ccc;
@@ -80,7 +92,6 @@
   <h1>💸 Pembayaran DamxStore</h1>
 
   <div class="container">
-
     <!-- TnG -->
     <div class="card">
       <img src="https://files.catbox.moe/0jdutz.jpg" class="logo" alt="Logo TnG">
@@ -94,7 +105,6 @@
       <p id="duitnow">120331861205</p>
       <button class="btn" onclick="copyText('duitnow')">📋 Salin Nombor</button>
     </div>
-
   </div>
 
   <footer>From DAMX STORE ❤️</footer>
@@ -107,8 +117,30 @@
     <input type="text" id="harga" placeholder="Jumlah Bayaran" required><br>
     <input type="file" id="bukti" accept="image/*" required><br>
     <button class="btn" type="submit">🚀 Hantar ke Telegram</button>
-    <button class="btn" type="button" onclick="muatTurunResit()">⬇️ Muat Turun Resit</button>
+    <button class="btn" type="button" onclick="copyResit()">📋 Copy Resit</button>
   </form>
+
+  <!-- Textarea Resit -->
+  <textarea id="resitText" readonly>
+RESIT PEMBELIAN DI DAMXSTORE
+
+📌DETAIL TRANSAKSI
+━━━━━━━━━━━━━━━━
+
+> 🛍️ITEM:
+📆DATE:
+💰TOTAL:
+💸HARGA:
+━━━━━━━━━━━━━━━━
+TERIMA KASIH KERANA SUPPORT DAMX 🫶
+DAMXSTORE: 601130538675
+NO BACKUP: 601157072764
+━━━━━━━━━━━━━━━━
+NOTE
+ALL TRX NO REFUND
+#NO RESIT,NO WARRANTY
+#DAMX NEED FAMOUS
+  </textarea>
 
   <!-- Link Telegram/WhatsApp -->
   <div style="margin-top:30px;">
@@ -125,27 +157,12 @@
       alert("Nombor disalin: " + copyText);
     }
 
-    function muatTurunResit() {
-      const nama = document.getElementById('nama').value;
-      const item = document.getElementById('item').value;
-      const harga = document.getElementById('harga').value;
-      const tarikh = new Date().toLocaleString();
-
-      const resit = `═══════════════════════════
-💰 *RESIT PEMBAYARAN DAMXSTORE*
-═══════════════════════════
-👤 *Nama:* ${nama}
-📦 *Item:* ${item}
-💸 *Jumlah:* ${harga}
-📆 *Tarikh:* ${tarikh}
-═══════════════════════════
-_Terima kasih menyokong Damx Store 💖_`;
-
-      const blob = new Blob([resit], { type: "text/plain;charset=utf-8" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "resit_damxstore.txt";
-      link.click();
+    function copyResit() {
+      const resit = document.getElementById("resitText");
+      resit.select();
+      resit.setSelectionRange(0, 99999);
+      document.execCommand("copy");
+      alert("Resit telah disalin!");
     }
 
     document.getElementById("resitForm").addEventListener("submit", function (e) {
@@ -155,7 +172,7 @@ _Terima kasih menyokong Damx Store 💖_`;
       const harga = document.getElementById("harga").value;
       const file = document.getElementById("bukti").files[0];
 
-      alert("⏳ Sila tunggu 10 saat untuk hantar ke Telegram...");
+      alert("⏳ Sila tunggu 3 saat untuk hantar ke Telegram...");
 
       setTimeout(() => {
         const botToken = "7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc";
@@ -178,7 +195,7 @@ _Terima kasih menyokong Damx Store 💖_`;
         }).catch(error => {
           alert("❗ Ralat sambungan.");
         });
-      }, 10000); // Jeda 10 saat
+      }, 3000); // JEDA 3 SAAT
     });
   </script>
 </body>
