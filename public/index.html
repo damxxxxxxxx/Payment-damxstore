@@ -35,13 +35,6 @@
       width: 280px;
     }
 
-    .qr {
-      width: 220px;
-      height: auto;
-      margin: 15px 0;
-      border-radius: 12px;
-    }
-
     .logo {
       height: 40px;
       margin-bottom: 10px;
@@ -81,15 +74,13 @@
     <!-- TnG -->
     <div class="card">
       <img src="https://files.catbox.moe/0jdutz.jpg" class="logo" alt="Logo TnG">
-      <img src="https://files.catbox.moe/dpqpc8.jpg" class="qr" alt="QR TnG">
-      <p>Imbas QR TnG untuk bayar</p>
-      <button class="btn" onclick="downloadQR('https://files.catbox.moe/dpqpc8.jpg', 'qr-tng.jpg')">⬇️ Muat Turun QR</button>
+      <p>Tekan untuk lihat QR</p>
+      <button class="btn" onclick="location.href='qr-tng.html'">📷 Liat QR TnG</button>
     </div>
 
     <!-- DuitNow -->
     <div class="card">
       <img src="https://files.catbox.moe/zjl6nd.jpg" class="logo" alt="Logo DuitNow">
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=duitnow:120331861205" class="qr" alt="QR DuitNow">
       <p>120331861205</p>
       <button class="btn" onclick="copyText('120331861205')">📋 Salin Nombor</button>
     </div>
@@ -104,15 +95,6 @@
     function copyText(text) {
       navigator.clipboard.writeText(text);
       alert("Nombor disalin: " + text);
-    }
-
-    function downloadQR(url, filename) {
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = filename;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
     }
   </script>
 
