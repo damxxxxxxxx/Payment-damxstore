@@ -2,75 +2,109 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>QR Bayaran - DAMX STORE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>QR Pembayaran</title>
   <style>
     body {
       margin: 0;
-      background-color: #111;
-      color: #fff;
       font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
+      background-color: #0a0a0a;
+      color: #ffffff;
+      text-align: center;
     }
+
     h1 {
-      margin-bottom: 10px;
-      color: #0ff;
+      margin-top: 20px;
+      font-size: 26px;
+      color: #00f0ff;
     }
-    .qr-container {
+
+    .container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 30px;
     }
-    .qr-img {
-      width: 250px;
-      height: 250px;
-      border: 4px solid #0ff;
-      border-radius: 20px;
+
+    .card {
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 0 15px #00f0ff66;
+      width: 280px;
+    }
+
+    .qr {
+      width: 220px;
+      height: auto;
+      margin: 15px 0;
+      border-radius: 12px;
+    }
+
+    .logo {
+      height: 40px;
       margin-bottom: 10px;
     }
-    .pay-label {
-      font-size: 18px;
-      font-weight: bold;
-    }
-    .copy-btn {
-      margin-top: 5px;
-      padding: 8px 16px;
+
+    .btn {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
       border: none;
       border-radius: 8px;
-      background-color: #0ff;
-      color: #000;
+      background-color: #00f0ff;
+      color: black;
+      font-weight: bold;
       cursor: pointer;
     }
-    .copy-btn:hover {
-      background-color: #0cc;
+
+    p {
+      font-size: 14px;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
-  <h1>QR Pembayaran</h1>
 
-  <div class="qr-container">
-    <div class="pay-label">DuitNow QR</div>
-    <img src="https://i.ibb.co/5vDbJvt/duitnowqr.png" alt="QR DuitNow" class="qr-img" />
-    <button class="copy-btn" onclick="copyText('601130538675')">Salin Nombor</button>
-  </div>
+  <h1>📲 QR Pembayaran DamxStore</h1>
 
-  <div class="qr-container">
-    <div class="pay-label">TnG QR</div>
-    <img src="https://i.ibb.co/smXrRKH/tngqr.png" alt="QR TnG" class="qr-img" />
-    <button class="copy-btn" onclick="copyText('01130538675')">Salin Nombor</button>
+  <div class="container">
+
+    <!-- TnG -->
+    <div class="card">
+      <img src="https://files.catbox.moe/0jdutz.jpg" class="logo" alt="TnG Logo">
+      <img src="https://files.catbox.moe/dpqpc8.jpg" class="qr" alt="QR TnG">
+      <p>QR Touch 'n Go</p>
+      <button class="btn" onclick="downloadQR('https://files.catbox.moe/dpqpc8.jpg', 'qr-tng.jpg')">⬇️ Muat Turun QR</button>
+    </div>
+
+    <!-- DuitNow -->
+    <div class="card">
+      <img src="https://files.catbox.moe/zjl6nd.jpg" class="logo" alt="DuitNow Logo">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=duitnow:120331861205" class="qr" alt="QR DuitNow">
+      <p>120331861205</p>
+      <button class="btn" onclick="copyText('120331861205')">📋 Salin Nombor</button>
+    </div>
+
   </div>
 
   <script>
     function copyText(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        alert('Nombor berjaya disalin: ' + text);
-      });
+      navigator.clipboard.writeText(text);
+      alert("Nombor disalin: " + text);
+    }
+
+    function downloadQR(url, filename) {
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   </script>
+
 </body>
 </html>
