@@ -47,7 +47,7 @@
       font-weight: bold;
       cursor: pointer;
     }
-    input, select {
+    input {
       margin: 5px 0;
       padding: 10px;
       width: 80%;
@@ -65,10 +65,6 @@
       border-radius: 10px;
       font-size: 14px;
       resize: none;
-    }
-    p {
-      font-size: 14px;
-      color: #ccc;
     }
     footer {
       margin-top: 40px;
@@ -112,35 +108,16 @@
   <!-- Upload Resit -->
   <h2 style="margin-top:40px;">📤 Muat Naik Resit Pembayaran</h2>
   <form id="resitForm">
-    <input type="text" id="nama" placeholder="Nama Anda" required><br>
-    <input type="text" id="item" placeholder="Nama Item" required><br>
-    <input type="text" id="harga" placeholder="Jumlah Bayaran" required><br>
+    <input type="text" id="nama" placeholder="Nama Anda" required oninput="updateResit()"><br>
+    <input type="text" id="item" placeholder="Nama Item" required oninput="updateResit()"><br>
+    <input type="text" id="harga" placeholder="Jumlah Bayaran" required oninput="updateResit()"><br>
     <input type="file" id="bukti" accept="image/*" required><br>
     <button class="btn" type="submit">🚀 Hantar ke Telegram</button>
     <button class="btn" type="button" onclick="copyResit()">📋 Copy Resit</button>
   </form>
 
   <!-- Textarea Resit -->
-  <textarea id="resitText" readonly>
-RESIT PEMBELIAN DI DAMXSTORE
-
-📌DETAIL TRANSAKSI
-━━━━━━━━━━━━━━━━
-
-> 🛍️ITEM:
-📆DATE:
-💰TOTAL:
-💸HARGA:
-━━━━━━━━━━━━━━━━
-TERIMA KASIH KERANA SUPPORT DAMX 🫶
-DAMXSTORE: 601130538675
-NO BACKUP: 601157072764
-━━━━━━━━━━━━━━━━
-NOTE
-ALL TRX NO REFUND
-#NO RESIT,NO WARRANTY
-#DAMX NEED FAMOUS
-  </textarea>
+  <textarea id="resitText" readonly></textarea>
 
   <!-- Link Telegram/WhatsApp -->
   <div style="margin-top:30px;">
@@ -163,6 +140,34 @@ ALL TRX NO REFUND
       resit.setSelectionRange(0, 99999);
       document.execCommand("copy");
       alert("Resit telah disalin!");
+    }
+
+    function updateResit() {
+      const nama = document.getElementById("nama").value || "-";
+      const item = document.getElementById("item").value || "-";
+      const harga = document.getElementById("harga").value || "-";
+      const tarikh = new Date().toLocaleString();
+
+      const teks = `RESIT PEMBELIAN DI DAMXSTORE
+
+📌DETAIL TRANSAKSI
+━━━━━━━━━━━━━━━━
+
+> 🛍️ITEM: ${item}
+📆DATE: ${tarikh}
+💰TOTAL: ${harga}
+💸HARGA: ${harga}
+━━━━━━━━━━━━━━━━
+TERIMA KASIH KERANA SUPPORT DAMX 🫶
+DAMXSTORE: 601130538675
+NO BACKUP: 601157072764
+━━━━━━━━━━━━━━━━
+NOTE
+ALL TRX NO REFUND
+#NO RESIT,NO WARRANTY
+#DAMX NEED FAMOUS`;
+
+      document.getElementById("resitText").value = teks;
     }
 
     document.getElementById("resitForm").addEventListener("submit", function (e) {
@@ -195,8 +200,11 @@ ALL TRX NO REFUND
         }).catch(error => {
           alert("❗ Ralat sambungan.");
         });
-      }, 3000); // JEDA 3 SAAT
+      }, 3000); // 3 SAAT
     });
+
+    // Auto isi resit bila page load juga
+    window.onload = updateResit;
   </script>
 </body>
 </html>
