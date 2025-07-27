@@ -163,7 +163,7 @@ _Terima kasih menyokong Damx Store 💖_`;
 
         const formData = new FormData();
         formData.append("chat_id", chatId);
-        formData.append("caption", `🧾 *BUKTI BAYARAN DAMX STORE*\n\n👤 *Nama:* ${nama}\n📦 *Item:* ${item}\n💸 *Jumlah:* ${harga}\n📆 *Tarikh:* ${new Date().toLocaleString()}\n\n_Terima kasih menyokong Damx Store 💖_`);
+        formData.append("caption", `🧾 *BUKTI BAYARAN DAMX STORE*\n\n👤 Nama: ${nama}\n📦 Item: ${item}\n💸 Jumlah: ${harga}\n📆 Tarikh: ${new Date().toLocaleString()}\n\n_Terima kasih menyokong Damx Store 💖_`);
         formData.append("photo", file);
 
         fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
