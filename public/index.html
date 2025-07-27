@@ -55,7 +55,7 @@
       border: none;
     }
     textarea {
-      display: none; /* SEMBUNYIKAN RESIT */
+      display: none;
     }
     footer {
       margin-top: 40px;
@@ -79,14 +79,12 @@
   <h1>💸 Pembayaran DamxStore</h1>
 
   <div class="container">
-    <!-- TnG -->
     <div class="card">
       <img src="https://files.catbox.moe/0jdutz.jpg" class="logo" alt="Logo TnG">
       <p>Tekan untuk lihat QR</p>
       <button class="btn" onclick="location.href='qr-tng.html'">📷 Liat QR TnG</button>
     </div>
 
-    <!-- DuitNow -->
     <div class="card">
       <img src="https://files.catbox.moe/zjl6nd.jpg" class="logo" alt="Logo DuitNow">
       <p id="duitnow">120331861205</p>
@@ -110,7 +108,6 @@
   <!-- Hidden Textarea Resit -->
   <textarea id="resitText" readonly></textarea>
 
-  <!-- Link Telegram/WhatsApp -->
   <div style="margin-top:30px;">
     <a class="btn-link" href="https://t.me/DamxStore_bot" target="_blank">📲 Telegram</a>
     <a class="btn-link" href="https://wa.me/601130538675" target="_blank">💬 WhatsApp</a>
@@ -135,7 +132,6 @@
 
 📌DETAIL TRANSAKSI
 ━━━━━━━━━━━━━━━━
-
 > 🛍️ITEM: ${item}
 > 📆DATE: ${tarikh}
 > 💰TOTAL: ${harga}
@@ -150,18 +146,10 @@ ALL TRX NO REFUND
 #NO RESIT,NO WARRANTY
 #DAMX NEED FAMOUS`;
 
-    document.getElementById("resitText").value = teks;
-  }
-
-  function copyResit() {
-    updateResit();
     const resit = document.getElementById("resitText");
-    const form = document.getElementById("resitForm");
+    resit.value = teks;
 
-    // Sembunyi form
-    form.style.display = "none";
-
-    // Tunjuk resit dengan gaya kecil
+    // Tunjuk gaya resit
     resit.style.display = "block";
     resit.style.height = "160px";
     resit.style.width = "90%";
@@ -172,13 +160,23 @@ ALL TRX NO REFUND
     resit.style.color = "#0ff";
     resit.style.borderRadius = "8px";
     resit.style.border = "1px solid #0ff";
+    resit.style.resize = "none";
+  }
 
-    // Salin automatik
+  function copyResit() {
+    updateResit();
+
+    const resit = document.getElementById("resitText");
     resit.select();
     resit.setSelectionRange(0, 99999);
     document.execCommand("copy");
 
     alert("📋 Resit telah disalin!");
+
+    // Auto sembunyi semula selepas 10 saat
+    setTimeout(() => {
+      resit.style.display = "none";
+    }, 10000);
   }
 
   document.getElementById("resitForm").addEventListener("submit", function (e) {
