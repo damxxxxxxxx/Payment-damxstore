@@ -1,166 +1,168 @@
-<!DOCTYPE html><html lang="ms"><head>
+<!DOCTYPE html><html lang="ms">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pembayaran - DamxStore</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Pembayaran DamxStore</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #ff0055;
-      --background: #0d0d0d;
-      --card-bg: #1a1a1a;
-      --text: #fff;
-      --btn-bg: #ff0055;
-      --btn-hover: #cc0044;
-    }* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-}
-
-body {
-  background: var(--background);
-  color: var(--text);
-  padding: 2rem;
-}
-
-h1 {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: var(--primary);
-}
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-}
-
-.card {
-  background: var(--card-bg);
-  padding: 1.5rem;
-  border-radius: 1rem;
-  width: 300px;
-  box-shadow: 0 4px 12px rgba(255, 0, 85, 0.3);
-  text-align: center;
-}
-
-.card img.logo {
-  max-width: 80px;
-  margin-bottom: 1rem;
-}
-
-.card img.qr {
-  width: 100%;
-  border-radius: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.card p {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-  color: #ccc;
-}
-
-.btn {
-  display: block;
-  margin: 0.5rem auto;
-  padding: 0.6rem 1.2rem;
-  background-color: var(--btn-bg);
-  border: none;
-  border-radius: 0.5rem;
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  font-weight: bold;
-}
-
-.btn:hover {
-  background-color: var(--btn-hover);
-}
-
-.upload-section {
-  margin-top: 3rem;
-  text-align: center;
-}
-
-.upload-section input {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+      color: #fff;
+      padding: 2rem;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #121212;
+      border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.05);
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      color: #00f7ff;
+    }
+    .payment-section {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .payment-section img {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #00f7ff44;
+    }
+    button {
+      padding: 10px 20px;
+      background: #00f7ff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #00c7cc;
+    }
+    .resit-form input, .resit-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 0.5rem 0;
+      border: none;
+      border-radius: 8px;
+      background: #1f1f1f;
+      color: #fff;
+    }
+    .notification {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #1c1c1c;
+      border-radius: 8px;
+      display: none;
+    }
+    .duo-qr {
+      display: grid;
+      gap: 1.5rem;
+    }
+    @media (min-width: 600px) {
+      .duo-qr {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
   </style>
-</head><body>
-  <h1>Pembayaran DamxStore</h1>
-  <div class="cards">
-    <!-- TnG Card -->
-    <div class="card">
-      <img src="https://files.catbox.moe/dyzyz3.jpg" alt="QR TnG" class="qr">
-      <p id="tngNumber">01110574393</p>
-      <button class="btn" onclick="copyNumber('01110574393')">📋 Salin Nombor</button>
-      <a href="https://files.catbox.moe/dyzyz3.jpg" class="btn" download>⬇️ Muat Turun QR</a>
-    </div><!-- DuitNow Card -->
-<div class="card">
-  <img src="https://files.catbox.moe/p9ky7m.jpg" alt="QR DuitNow" class="qr">
-  <p id="duitnowNumber">120331861205</p>
-  <button class="btn" onclick="copyNumber('120331861205')">📋 Salin Nombor</button>
-  <a href="https://files.catbox.moe/p9ky7m.jpg" class="btn" download>⬇️ Muat Turun QR</a>
+</head>
+<body>
+  <div class="container">
+    <h1><i class="fas fa-wallet"></i> Pembayaran DamxStore</h1><div class="duo-qr">
+  <div class="payment-section">
+    <h2>Touch 'n Go</h2>
+    <img id="tngQR" src="https://files.catbox.moe/dyzyz3.jpg" alt="TnG QR" />
+    <button onclick="downloadQR('tngQR', 'Damx-TnG')">Muat Turun QR</button>
+  </div>
+  <div class="payment-section">
+    <h2>DuitNow</h2>
+    <img id="duitQR" src="https://files.catbox.moe/p9ky7m.jpg" alt="DuitNow QR" />
+    <button onclick="downloadQR('duitQR', 'Damx-DuitNow')">Muat Turun QR</button>
+  </div>
 </div>
 
-  </div>  <div class="upload-section">
-    <h2>Upload Bukti Pembayaran</h2>
-    <form id="paymentForm">
-      <input type="text" name="nama" placeholder="Masukkan nama anda" required><br>
-      <input type="text" name="item" placeholder="Masukkan nama item" required><br>
-      <input type="number" name="jumlah" placeholder="Jumlah bayaran (RM)" required><br>
-      <input type="file" name="resit" id="resit" accept="image/*" required><br>
-      <button type="submit" class="btn">📤 Hantar Resit</button>
-    </form>
+<form class="resit-form" id="uploadForm">
+  <h3 style="margin-top:2rem">📤 Muat Naik Bukti Pembayaran</h3>
+  <input type="text" name="nama" placeholder="Nama Anda" required>
+  <input type="text" name="item" placeholder="Item Dibeli" required>
+  <input type="number" name="jumlah" placeholder="Jumlah (RM)" required>
+  <input type="file" name="resit" accept="image/*" required>
+  <button type="submit">Hantar Resit ke Admin</button>
+</form>
+
+<div class="notification" id="notification"></div>
+
   </div>  <script>
-    const form = document.getElementById("paymentForm");
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    const botToken = '7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc';
+    const chatId = '6943312517';
 
-      const nama = form.nama.value;
-      const item = form.item.value;
-      const jumlah = form.jumlah.value;
-      const resit = document.getElementById("resit").files[0];
-
-      if (!resit) return alert("Sila pilih gambar resit!");
-
-      const token = "7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc";
-      const chatId = "6943312517";
-
-      const caption = `🧾 *BUKTI BAYARAN DAMX STORE*\n\n👤 *Nama:* ${nama}\n📦 *Item:* ${item}\n💸 *Jumlah:* RM ${jumlah}\n📆 *Tarikh:* ${new Date().toLocaleString("ms-MY")}\n\n_Terima kasih menyokong Damx Store 💖_`;
-
-      const formData = new FormData();
-      formData.append("chat_id", chatId);
-      formData.append("caption", caption);
-      formData.append("photo", resit);
-
-      await fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
-        method: "POST",
-        body: formData
-      }).then(res => {
-        if (res.ok) {
-          alert("✅ Resit berjaya dihantar ke admin!");
-          form.reset();
-        } else {
-          alert("❌ Gagal hantar resit. Sila cuba semula.");
-        }
-      }).catch(() => {
-        alert("❌ Ralat berlaku semasa penghantaran.");
-      });
-    });
-
-    function copyNumber(number) {
-      navigator.clipboard.writeText(number).then(() => {
-        alert(`✔️ Nombor ${number} disalin!`);
-      }).catch(() => {
-        alert(`❌ Gagal salin. Sila salin manual: ${number}`);
-      });
+    function showNotification(msg) {
+      const notif = document.getElementById('notification');
+      notif.innerHTML = msg;
+      notif.style.display = 'block';
+      setTimeout(() => notif.style.display = 'none', 5000);
     }
-  </script></body></html>
+
+    function downloadQR(id, filename) {
+      const img = document.getElementById(id);
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const qr = new Image();
+      qr.crossOrigin = 'anonymous';
+      qr.onload = function() {
+        canvas.width = qr.width;
+        canvas.height = qr.height;
+        ctx.drawImage(qr, 0, 0);
+        const link = document.createElement('a');
+        link.download = filename + '.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      };
+      qr.src = img.src;
+    }
+
+    document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const file = formData.get('resit');
+
+      const textMessage = `🧾 *BUKTI BAYARAN DAMX STORE*\n\n👤 *Nama:* ${formData.get('nama')}\n📦 *Item:* ${formData.get('item')}\n💸 *Jumlah:* RM ${formData.get('jumlah')}\n📆 *Tarikh:* ${new Date().toLocaleString('ms-MY')}\n\n_Terima kasih menyokong Damx Store 💖_`;
+
+      try {
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: chatId, text: textMessage, parse_mode: 'Markdown' })
+        });
+
+        const photoData = new FormData();
+        photoData.append('chat_id', chatId);
+        photoData.append('photo', file);
+
+        await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+          method: 'POST',
+          body: photoData
+        });
+
+        showNotification('✅ Resit berjaya dihantar ke admin.');
+        this.reset();
+      } catch (err) {
+        showNotification('❌ Gagal menghantar resit. Sila cuba lagi.');
+      }
+    });
+  </script></body>
+</html>
