@@ -1,148 +1,214 @@
-<!DOCTYPE html>
-<html lang="ms">
+<!DOCTYPE html><html lang="ms">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pembayaran DamxStore</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DAMXSTORE Payment</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* ===== GLOBAL RESET & FONT ===== */
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
-    body{background:linear-gradient(145deg,#0d0d0d,#1a1a1a);color:#f2f2f2;min-height:100vh;}
-    a, button{font-family:inherit;}
-    header{background:#111;padding:1rem;text-align:center;box-shadow:0 0 15px #00ffcc33;}
-    header h1{color:#00ffcc;font-size:2rem;}
+    :root {
+      --primary-color: #00ffc3;
+      --secondary-color: #121212;
+      --text-color: #ffffff;
+      --accent-color: #ff00a6;
+    }body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(145deg, #000000, #0a0a0a);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
 
-    /* ===== LAYOUT ===== */
-    .container{max-width:800px;margin:2rem auto;padding:1rem;}
-    .flex-two{display:flex;flex-wrap:wrap;gap:1.5rem;}
-    .card{flex:1 1 calc(50% - 1.5rem);background:#1f1f1f;border-radius:12px;padding:1.5rem;text-align:center;box-shadow:0 0 20px rgba(0,255,204,0.2);transition:transform 0.3s;}
-    .card:hover{transform:translateY(-5px);}
-    .card img{max-width:200px;width:100%;border-radius:10px;box-shadow:0 0 10px rgba(0,255,204,0.3);}
-    .card h2{margin-bottom:1rem;color:#00ffcc;}
-    .card p{margin:0.5rem 0;font-size:1.1rem;}
+header {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.4);
+  position: relative;
+}
 
-    /* ===== BTN ===== */
-    .btn{display:inline-block;margin:0.75rem 0;padding:0.75rem 1.5rem;background:#00ffcc;color:#000;border:none;border-radius:8px;cursor:pointer;font-weight:600;transition:background 0.3s;}
-    .btn:hover{background:#00ccaa;}
+header h1 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
 
-    /* ===== UPLOAD FORM ===== */
-    .upload{background:#1e1e1e;border-radius:12px;padding:1.5rem;margin-top:2rem;box-shadow:0 0 20px rgba(0,255,204,0.2);}
-    .upload h2{margin-bottom:1rem;color:#00ffcc;}
-    .upload input[type=text], .upload input[type=number], .upload input[type=file]{width:100%;padding:0.75rem;margin-bottom:1rem;border-radius:8px;border:none;background:#2a2a2a;color:#fff;}
-    .upload button{width:100%;}
+.section {
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem;
+  background-color: rgba(255,255,255,0.05);
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 255, 195, 0.2);
+  margin-bottom: 2rem;
+}
 
-    /* ===== NOTIF ===== */
-    .notification{position:fixed;top:20px;right:20px;background:#111;color:#00ffcc;padding:1rem;border-radius:8px;box-shadow:0 0 15px #00ffcc33;display:none;z-index:999;}
+.qr-img {
+  display: block;
+  margin: 0 auto;
+  width: 250px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
 
-    /* ===== MOBILE ===== */
-    @media(max-width:600px){.flex-two{flex-direction:column;}}
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  margin: 1rem 0.5rem;
+  background-color: var(--primary-color);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.upload-section {
+  text-align: center;
+  padding: 1rem;
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+  border: none;
+  background: #1e1e1e;
+  color: var(--text-color);
+}
+
+#notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #00ffc3;
+  color: #000;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ffc3;
+  display: none;
+  z-index: 999;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.social-buttons a {
+  background: rgba(255,255,255,0.1);
+  padding: 1rem;
+  border-radius: 12px;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-buttons a:hover {
+  background: var(--accent-color);
+}
+
+audio {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  z-index: 99;
+}
 
   </style>
 </head>
-<body>
-<header><h1>💸 Pembayaran DamxStore</h1></header>
-
-<div class="container">
-
-  <!-- QR SECTION -->
-  <div class="flex-two">
-    <!-- TNG -->
-    <div class="card" id="card-tng">
-      <h2><i class="fas fa-qrcode"></i> Touch 'n Go</h2>
-      <img src="https://files.catbox.moe/dyzyz3.jpg" id="tngQR" alt="QR TnG">
-      <p><strong>Nombor TnG:</strong> <span id="tngNumber">01124351320</span></p>
-      <button class="btn" onclick="downloadQR('tngQR','TnG-QR')"><i class="fas fa-download"></i> Muat Turun QR</button>
-      <button class="btn" onclick="copyNum('tngNumber')"><i class="fas fa-copy"></i> Salin Nombor</button>
-    </div>
-    <!-- DUITNOW -->
-    <div class="card" id="card-duit">
-      <h2><i class="fas fa-money-check"></i> DuitNow</h2>
-      <img src="https://files.catbox.moe/p9ky7m.jpg" alt="DuitNow Logo">
-      <p><strong>Nombor DuitNow:</strong> <span id="duitNumber">120331861205</span></p>
-      <button class="btn" onclick="copyNum('duitNumber')"><i class="fas fa-copy"></i> Salin Nombor</button>
-    </div>
-  </div>
-
-  <!-- UPLOAD SECTION -->
-  <div class="upload">
-    <h2><i class="fas fa-upload"></i> Muat Naik Resit Pembayaran</h2>
-    <input type="text" id="nama" placeholder="Nama Penuh Anda" required>
-    <input type="text" id="item" placeholder="Nama Item yang Dibeli" required>
-    <input type="number" id="jumlah" placeholder="Jumlah (RM)" required>
-    <input type="file" id="resit" accept="image/*" required>
-    <button class="btn" onclick="sendResit()"><i class="fas fa-paper-plane"></i> Hantar ke Admin</button>
-  </div>
-
-</div>
-
-<div class="notification" id="notif"></div>
-
-<script>
-  const bot = "7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc";
-  const chat = "6943312517";
-
-  function showNotif(msg) {
-    const n = document.getElementById('notif');
-    n.innerHTML = msg;
-    n.style.display = 'block';
-    setTimeout(()=>n.style.display='none',3000);
-  }
-
-  function copyNum(id) {
-    const txt = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(txt).then(()=>showNotif("✔️ Nombor disalin: "+txt))
-    .catch(()=>showNotif("❌ Gagal salin nombor"));
-  }
-
-  function downloadQR(imgId, filename) {
-    const img = document.getElementById(imgId);
-    const c = document.createElement('canvas');
-    const ctx = c.getContext('2d');
-    const i = new Image();
-    i.crossOrigin='anonymous';
-    i.onload=()=>{c.width=i.width;c.height=i.height;ctx.drawImage(i,0,0);
-      const a=document.createElement('a');
-      a.href=c.toDataURL();a.download=filename+'.png';a.click();
-    showNotif("⬇️ QR dimuat turun!");};
-    i.src=img.src;
-  }
-
-  async function sendResit() {
-    const nama=document.getElementById('nama').value.trim();
-    const item=document.getElementById('item').value.trim();
-    const jumlah=document.getElementById('jumlah').value.trim();
-    const file=document.getElementById('resit').files[0];
-    if(!nama||!item||!jumlah||!file)return showNotif("❌ Lengkapkan semua maklumat!");
-
-    const cap = `🧾 *BUKTI BAYARAN DAMX STORE*\\n\\n👤 Nama: ${nama}\\n📦 Item: ${item}\\n💸 Jumlah: RM ${jumlah}\\n📆 Tarikh: ${new Date().toLocaleString('ms-MY')}\\n_Terima kasih menyokong Damx Store 💖_`;
-    const fd = new FormData();
-    fd.append('chat_id', chat);
-    fd.append('caption', cap);
-    fd.append('photo', file);
-
-    try{
-      const res = await fetch(`https://api.telegram.org/bot${bot}/sendPhoto`, {
-        method:'POST', body:fd
+<body>  <header>
+    <h1><i class="fas fa-wallet"></i> DAMXSTORE PAYMENT</h1>
+    <p>Sila scan kod QR atau salin nombor untuk membuat pembayaran.</p>
+  </header>  <section class="section">
+    <h2><i class="fas fa-qrcode"></i> QR TnG Payment</h2>
+    <img src="https://files.catbox.moe/dyzyz3.jpg" alt="QR TnG" class="qr-img" id="qrisImage">
+    <button class="btn" onclick="downloadQRIS()"><i class="fas fa-download"></i> Muat Turun QR</button>
+  </section>  <section class="section">
+    <h2><i class="fas fa-barcode"></i> DuitNow Payment</h2>
+    <img src="https://files.catbox.moe/p9ky7m.jpg" alt="Logo DuitNow" class="qr-img">
+    <p>No. DuitNow: <strong id="duitNow">012-3456789</strong></p>
+    <button class="btn" onclick="copyNumber('012-3456789')"><i class="fas fa-copy"></i> Salin Nombor</button>
+  </section>  <section class="section upload-section">
+    <h2><i class="fas fa-upload"></i> Muat Naik Resit</h2>
+    <input type="text" class="form-input" id="nama" placeholder="Nama Anda">
+    <input type="text" class="form-input" id="item" placeholder="Item Dibeli">
+    <input type="file" class="form-input" id="gambar">
+    <button class="btn" onclick="hantarTelegram()"><i class="fas fa-paper-plane"></i> Hantar ke Admin</button>
+  </section>  <div class="social-buttons">
+    <a href="https://wa.me/60123456789" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <a href="https://t.me/username" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
+  </div>  <div id="notification"></div>  <audio autoplay loop>
+    <source src="https://files.catbox.moe/5xj1dj.mp3" type="audio/mpeg">
+  </audio>  <script>
+    function copyNumber(number) {
+      navigator.clipboard.writeText(number).then(() => {
+        showNotification(`<i class='fas fa-check-circle'></i> Nombor disalin: ${number}`);
+      }).catch(() => {
+        showNotification(`<i class='fas fa-exclamation-circle'></i> Gagal salin nombor.`);
       });
-      res.ok?showNotif("✅ Resit berjaya dihantar!") : showNotif("❌ Gagal hantar resit");
-    }catch(err){showNotif("❌ Ralat sambungan")}
+    }
 
-    document.getElementById('upload').reset?.();
-  }
+    function showNotification(msg) {
+      const note = document.getElementById("notification");
+      note.innerHTML = msg;
+      note.style.display = "block";
+      setTimeout(() => note.style.display = "none", 3000);
+    }
 
-  // ===== PENGGANJAL RUANG hingga ~1000 baris =====
-  // Tambahkan banyak komen kosong di bawah
-  // ----------------------------------------
-</script>
+    function downloadQRIS() {
+      const qrisImage = document.getElementById('qrisImage');
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = function () {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+        const link = document.createElement('a');
+        link.download = 'Damx-TnG-Payment.png';
+        link.href = canvas.toDataURL();
+        link.click();
+        showNotification(`<i class='fas fa-download'></i> TnG QR berjaya dimuat turun!`);
+      };
+      img.src = qrisImage.src;
+    }
 
-<!-- Ruang panjang kosong -->
-<script>
-  let empty = '';
-  for(let i=0;i<800;i++){ empty += '//\n'; }
-  console.log(empty);
-</script>
+    function hantarTelegram() {
+      const nama = document.getElementById('nama').value;
+      const item = document.getElementById('item').value;
+      const gambar = document.getElementById('gambar').files[0];
 
-</body>
+      if (!nama || !item || !gambar) {
+        showNotification(`<i class='fas fa-exclamation-circle'></i> Sila lengkapkan semua maklumat.`);
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("chat_id", "6943312517");
+      formData.append("caption", `🧾 *BUKTI BAYARAN DAMX STORE*\n\n👤 *Nama:* ${nama}\n📦 *Item:* ${item}\n📆 Tarikh: ${new Date().toLocaleString('ms-MY')}\n\n_Terima kasih menyokong Damx Store 💖_`);
+      formData.append("photo", gambar);
+
+      fetch("https://api.telegram.org/bot7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc/sendPhoto", {
+        method: "POST",
+        body: formData
+      })
+        .then(res => res.json())
+        .then(data => {
+          showNotification(`<i class='fas fa-check-circle'></i> Resit berjaya dihantar ke admin!`);
+        })
+        .catch(err => {
+          showNotification(`<i class='fas fa-exclamation-circle'></i> Gagal hantar resit. Cuba lagi.`);
+        });
+    }
+  </script></body>
 </html>
