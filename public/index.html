@@ -1,108 +1,150 @@
 <!DOCTYPE html><html lang="ms">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pembayaran VVIP - Damx Store</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DAMX STORE VVIP PAYMENT</title>
+  <link rel="icon" href="https://files.catbox.moe/dyzyz3.jpg" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     body {
       margin: 0;
-      background: #0e0e0e;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
       color: white;
-      font-family: 'Segoe UI', sans-serif;
-      scroll-behavior: smooth;
+      overflow-x: hidden;
     }
-    header, footer {
+    header {
+      background: rgba(0, 0, 0, 0.6);
       text-align: center;
-      padding: 2rem 1rem;
-      background: #1b1b1b;
+      padding: 1rem;
+      box-shadow: 0 0 15px #00f7ff;
     }
-    h1, h2 {
-      font-weight: 700;
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      color: #00f7ff;
     }
-    .payment-section {
-      padding: 2rem;
-      text-align: center;
-    }
-    .payment-section img {
-      max-width: 300px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    }
-    .button {
-      margin-top: 1rem;
-      padding: 12px 20px;
-      border: none;
-      background-color: #00b894;
-      color: white;
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: rgba(255, 255, 255, 0.05);
       border-radius: 10px;
-      cursor: pointer;
-    }
-    .button:hover {
-      background-color: #019875;
-    }
-    .resit-upload-section {
       padding: 2rem;
-      background: #111;
+      box-shadow: 0 0 20px rgba(0, 247, 255, 0.2);
+    }
+    .qris-section {
       text-align: center;
     }
-    #resitPreview {
+    .qris-section h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .qris-code {
+      width: 220px;
+      border: 3px solid #00f7ff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00f7ff;
+    }
+    .download-btn, .copy-btn {
+      margin-top: 1rem;
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      background: #00f7ff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .download-btn:hover, .copy-btn:hover {
+      background: #00e0ff;
+    }
+    .upload-section {
+      margin-top: 2rem;
+    }
+    .upload-section input[type="file"] {
+      display: block;
+      margin: 1rem auto;
+    }
+    .notif {
+      margin-top: 1rem;
+      padding: 0.8rem;
+      border-radius: 5px;
+      background: rgba(0, 247, 255, 0.1);
+      color: #00f7ff;
+      font-size: 0.95rem;
+      display: none;
+    }
+    .preview {
       margin-top: 1rem;
       max-width: 100%;
-      border-radius: 12px;
-    }
-    input[type="file"] {
-      display: none;
-    }
-    label.upload-label {
-      background-color: #2d3436;
-      padding: 12px 20px;
-      color: #fff;
       border-radius: 10px;
-      cursor: pointer;
+      box-shadow: 0 0 10px #00f7ff;
     }
-    .notification {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #2ecc71;
-      padding: 10px 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-      display: none;
-      z-index: 1000;
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+    .logo-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin: 1rem 0;
+    }
+    .logo-row img {
+      width: 60px;
+      height: auto;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>DAMX STORE VVIP PAYMENT</h1>
-    <p>💰 Scan & Upload Resit Untuk Selesaikan Pembayaran 💰</p>
-  </header>  <section class="payment-section">
-    <h2>Bayar Guna TnG / DuitNow</h2>
-    <img src="https://files.catbox.moe/dyzyz3.jpg" id="qrisImage" alt="QR TnG">
-    <br>
-    <button class="button" onclick="downloadQRIS()">Muat Turun QR TnG</button>
-    <br><br>
-    <img src="https://files.catbox.moe/p9ky7m.jpg" alt="Logo DuitNow" style="max-width: 150px;">
-    <p>No Akaun DuitNow: <strong id="duitNowNumber">01111467648</strong></p>
-    <button class="button" onclick="copyNumber('01111467648')">Salin Nombor</button>
-  </section>  <section class="resit-upload-section">
-    <h2>📤 Muat Naik Bukti Pembayaran</h2>
-    <label for="resitUpload" class="upload-label">Pilih Gambar Resit</label>
-    <input type="file" accept="image/*" id="resitUpload" onchange="previewImage()">
-    <br>
-    <img id="resitPreview" src="" alt="Resit Preview" style="display:none;">
-    <br>
-    <button class="button" onclick="submitResit()">Hantar Ke Admin</button>
-  </section>  <footer>
-    <p>From DAMX STORE 💎</p>
-  </footer>  <div id="notification" class="notification"></div>  <script>
+    <h1>💰 PEMBAYARAN DAMX STORE 💰</h1>
+  </header>
+  <div class="container">
+    <div class="qris-section">
+      <h3><i class="fas fa-qrcode"></i> Kod QR TNG</h3>
+      <div class="logo-row">
+        <img src="https://files.catbox.moe/dyzyz3.jpg" alt="TnG Logo">
+        <img src="https://files.catbox.moe/p9ky7m.jpg" alt="DuitNow Logo">
+      </div>
+      <img src="https://files.catbox.moe/dyzyz3.jpg" alt="QR TnG" class="qris-code" id="qrisImage">
+      <br>
+      <button class="download-btn" onclick="downloadQRIS()">Download QR TnG</button>
+    </div><div class="qris-section">
+  <h3><i class="fas fa-hand-holding-usd"></i> Salin Nombor Akaun DuitNow</h3>
+  <p id="duitnowNumber">01151234567</p>
+  <button class="copy-btn" onclick="copyNumber('01151234567')">Salin Nombor DuitNow</button>
+</div>
+
+<div class="upload-section">
+  <h3><i class="fas fa-upload"></i> Muat Naik Bukti Pembayaran</h3>
+  <input type="file" id="uploadResit" accept="image/*" onchange="previewImage(event)" />
+  <img id="resitPreview" class="preview" src="" alt="Preview Gambar Resit" style="display:none;" />
+  <div id="notif" class="notif"></div>
+</div>
+
+  </div>  <footer>
+    From DAMX STORE ❤️ | Tema VVIP 2025
+  </footer>  <script>
+    function showNotification(msg) {
+      const notif = document.getElementById('notif');
+      notif.innerHTML = msg;
+      notif.style.display = 'block';
+      setTimeout(() => notif.style.display = 'none', 4000);
+    }
+
     function copyNumber(number) {
       navigator.clipboard.writeText(number).then(() => {
-        showNotification(`<i class="fas fa-check-circle"></i> Number copied: ${number}`);
+        showNotification(`<i class="fas fa-check-circle"></i> Nombor disalin: ${number}`);
       }).catch(() => {
-        showNotification(`<i class="fas fa-exclamation-circle"></i> Failed to copy. Please copy manually: ${number}`);
+        showNotification(`<i class="fas fa-exclamation-circle"></i> Gagal salin nombor.`);
       });
     }
 
@@ -123,71 +165,27 @@
         link.href = canvas.toDataURL();
         link.click();
 
-        showNotification(`<i class="fas fa-download"></i> TnG downloaded successfully!`);
+        showNotification(`<i class="fas fa-download"></i> QR TnG dimuat turun!`);
       };
 
       img.src = qrisImage.src;
     }
 
-    function previewImage() {
-      const input = document.getElementById('resitUpload');
-      const preview = document.getElementById('resitPreview');
-      const file = input.files[0];
-
-      if (file && file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          preview.src = e.target.result;
-          preview.style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    function submitResit() {
-      const input = document.getElementById('resitUpload');
-      const file = input.files[0];
-      if (!file) {
-        showNotification(`<i class="fas fa-exclamation-triangle"></i> Sila pilih gambar resit.`);
+    function previewImage(event) {
+      const file = event.target.files[0];
+      if (!file.type.startsWith('image/')) {
+        showNotification(`<i class="fas fa-exclamation-circle"></i> Fail bukan gambar.`);
         return;
       }
 
       const reader = new FileReader();
-      reader.onload = function(event) {
-        const imageBase64 = event.target.result;
-
-        fetch('https://api.telegram.org/bot7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc/sendPhoto', {
-          method: 'POST',
-          body: JSON.stringify({
-            chat_id: '6943312517',
-            photo: imageBase64,
-            caption: '🧾 Bukti pembayaran dari pelanggan DAMX STORE'
-          }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-        .then(response => {
-          if (response.ok) {
-            showNotification(`<i class="fas fa-check-circle"></i> Resit dihantar ke admin!`);
-          } else {
-            throw new Error('Gagal hantar');
-          }
-        })
-        .catch(() => {
-          showNotification(`<i class="fas fa-exclamation-circle"></i> Gagal hantar resit.`);
-        });
-      };
+      reader.onload = function(e) {
+        const resitPreview = document.getElementById('resitPreview');
+        resitPreview.src = e.target.result;
+        resitPreview.style.display = 'block';
+        showNotification(`<i class="fas fa-image"></i> Gambar resit dimuat naik.`);
+      }
       reader.readAsDataURL(file);
-    }
-
-    function showNotification(message) {
-      const notification = document.getElementById('notification');
-      notification.innerHTML = message;
-      notification.style.display = 'block';
-      setTimeout(() => {
-        notification.style.display = 'none';
-      }, 4000);
     }
   </script></body>
 </html>
