@@ -2,180 +2,218 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DamxStore Payment</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <title>Pembayaran DAMX STORE</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
     :root {
-      --bg-dark: #0f0f0f;
-      --bg-light: #f5f5f5;
-      --text-dark: #fff;
-      --text-light: #111;
+      --dark-bg: #0d0d0d;
+      --light-bg: #f2f2f2;
+      --text-light: #fff;
+      --text-dark: #111;
       --neon: #00ffff;
     }body {
   margin: 0;
   padding: 0;
-  font-family: 'Orbitron', sans-serif;
-  background-color: var(--bg-dark);
-  color: var(--text-dark);
-  transition: all 0.3s ease-in-out;
-}
-
-.dark-mode {
-  background-color: var(--bg-light);
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--dark-bg);
   color: var(--text-light);
+  transition: all 0.3s ease;
 }
 
 .container {
-  max-width: 500px;
-  margin: 3rem auto;
-  background: rgba(0,0,0,0.5);
-  border-radius: 15px;
+  max-width: 600px;
+  margin: auto;
   padding: 2rem;
-  box-shadow: 0 0 15px var(--neon);
+  text-align: center;
 }
 
 h1 {
-  text-align: center;
-  margin-bottom: 1rem;
+  font-size: 2rem;
   color: var(--neon);
+  text-shadow: 0 0 5px var(--neon), 0 0 10px var(--neon);
 }
 
-.upload-section, .form-section {
+.qris-box {
+  background: #1a1a1a;
+  border: 2px solid var(--neon);
+  padding: 1rem;
+  border-radius: 1rem;
+  margin: 1rem 0;
+}
+
+.qris-box img {
+  width: 200px;
+  border-radius: 10px;
+}
+
+.btn {
+  background-color: transparent;
+  border: 2px solid var(--neon);
+  color: var(--neon);
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  margin: 0.5rem;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  background-color: var(--neon);
+  color: #000;
+}
+
+.form-upload {
   margin-top: 2rem;
 }
 
-.upload-section input[type="file"] {
+input[type="text"], input[type="file"] {
   width: 100%;
-  padding: 1rem;
-  border: 2px dashed var(--neon);
-  background-color: transparent;
-  color: var(--text-dark);
-  cursor: pointer;
-}
-
-.form-section input {
-  width: 100%;
-  padding: 0.8rem;
-  margin-top: 1rem;
-  border-radius: 8px;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
   border: none;
-}
-
-.btn-send {
-  width: 100%;
-  padding: 1rem;
-  margin-top: 1.5rem;
-  border: none;
-  border-radius: 8px;
-  background-color: var(--neon);
-  color: black;
-  font-size: 1rem;
-  cursor: pointer;
+  border-radius: 5px;
 }
 
 .notification {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #111;
-  color: #fff;
+  top: 10px;
+  right: 10px;
   padding: 1rem;
-  border-radius: 8px;
-  display: none;
-  z-index: 1000;
-  animation: fadeIn 0.5s ease-in-out;
+  border-radius: 5px;
+  background: var(--neon);
+  color: #000;
+  box-shadow: 0 0 10px var(--neon);
+  animation: fadeOut 3s ease forwards;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; display: none; }
 }
 
 .theme-toggle {
   position: fixed;
   top: 10px;
-  right: 10px;
-  background: var(--neon);
-  color: black;
+  left: 10px;
+}
+
+.theme-toggle button {
   padding: 0.5rem 1rem;
   border-radius: 20px;
+  border: none;
   cursor: pointer;
-  font-weight: bold;
+  background-color: var(--neon);
+  color: #000;
 }
 
   </style>
 </head>
 <body>
-  <div class="theme-toggle" onclick="toggleTheme()">🌗 Theme</div>  <div class="container">
-    <h1><i class="fas fa-receipt"></i> Upload Bukti Pembayaran</h1><div class="upload-section">
-  <input type="file" accept="image/*" id="receiptImage" onchange="previewImage()" />
-  <img id="preview" src="" style="margin-top:1rem;width:100%;border-radius:10px;display:none"/>
+  <div class="theme-toggle">
+    <button onclick="toggleTheme()">Tukar Tema</button>
+  </div>  <div class="container">
+    <h1>Pembayaran DAMX STORE</h1><div class="qris-box">
+  <h2>TnG (Touch 'n Go)</h2>
+  <img src="https://files.catbox.moe/dyzyz3.jpg" alt="QR TnG" id="qrisImage">
+  <br>
+  <button class="btn" onclick="copyNumber('01110589900')"><i class="fas fa-copy"></i> Salin Nombor</button>
+  <button class="btn" onclick="downloadQRIS()"><i class="fas fa-download"></i> Muat Turun QR</button>
 </div>
 
-<div class="form-section">
-  <input type="text" id="nama" placeholder="Masukkan Nama Anda" required>
-  <input type="text" id="noFon" placeholder="Masukkan No Telefon" required>
-  <input type="text" id="item" placeholder="Nama Item Dibeli" required>
-  <button class="btn-send" onclick="hantarResit()">Hantar Resit</button>
+<div class="qris-box">
+  <h2>DuitNow</h2>
+  <img src="https://files.catbox.moe/p9ky7m.jpg" alt="QR DuitNow">
+  <br>
+  <button class="btn" onclick="copyNumber('01110589900')"><i class="fas fa-copy"></i> Salin Nombor</button>
 </div>
 
-  </div>  <div class="notification" id="notif"></div>  <script>
-    function previewImage() {
-      const file = document.getElementById('receiptImage').files[0];
-      const preview = document.getElementById('preview');
-      const reader = new FileReader();
+<form class="form-upload" id="uploadForm">
+  <h3>Muat Naik Bukti Pembayaran</h3>
+  <input type="text" id="name" placeholder="Nama Anda" required>
+  <input type="text" id="phone" placeholder="Nombor Telefon" required>
+  <input type="text" id="item" placeholder="Nama Item" required>
+  <input type="file" id="receiptImage" accept="image/*" required>
+  <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Hantar Resit</button>
+</form>
 
-      reader.onloadend = function () {
-        preview.src = reader.result;
-        preview.style.display = 'block';
-      }
-
-      if (file) {
-        reader.readAsDataURL(file);
-      }
+  </div>  <div id="popup" class="notification" style="display:none;"></div>  <script>
+    function showNotification(message) {
+      const popup = document.getElementById('popup');
+      popup.innerHTML = message;
+      popup.style.display = 'block';
+      setTimeout(() => { popup.style.display = 'none'; }, 3000);
     }
 
-    function showNotification(message) {
-      const notif = document.getElementById('notif');
-      notif.innerHTML = message;
-      notif.style.display = 'block';
-      setTimeout(() => {
-        notif.style.display = 'none';
-      }, 3000);
+    function copyNumber(number) {
+      navigator.clipboard.writeText(number).then(() => {
+        showNotification(`<i class='fas fa-check-circle'></i> Nombor ${number} disalin!`);
+      });
+    }
+
+    function downloadQRIS() {
+      const qrisImage = document.getElementById('qrisImage');
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = function() {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+        const link = document.createElement('a');
+        link.download = 'Damx-TnG-Payment.png';
+        link.href = canvas.toDataURL();
+        link.click();
+        showNotification(`<i class='fas fa-download'></i> QR berjaya dimuat turun!`);
+      };
+      img.src = qrisImage.src;
     }
 
     function toggleTheme() {
-      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.style.backgroundColor === 'var(--light-bg)';
+      document.body.style.backgroundColor = isDark ? 'var(--dark-bg)' : 'var(--light-bg)';
+      document.body.style.color = isDark ? 'var(--text-light)' : 'var(--text-dark)';
     }
 
-    function hantarResit() {
-      const nama = document.getElementById('nama').value;
-      const noFon = document.getElementById('noFon').value;
+    const form = document.getElementById('uploadForm');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
       const item = document.getElementById('item').value;
-      const imageFile = document.getElementById('receiptImage').files[0];
+      const file = document.getElementById('receiptImage').files[0];
 
-      if (!imageFile || !nama || !noFon || !item) {
-        showNotification('<i class="fas fa-exclamation-circle"></i> Sila isi semua maklumat dan upload resit.');
-        return;
-      }
+      if (!file) return showNotification('Sila pilih gambar resit!');
 
-      const formData = new FormData();
-      formData.append('photo', imageFile);
-      formData.append('caption', `🧾 *BUKTI BAYARAN DAMX STORE*\n\n👤 *Nama:* ${nama}\n📞 *No Fon:* ${noFon}\n📦 *Item:* ${item}`);
+      const reader = new FileReader();
+      reader.onloadend = function() {
+        const data = {
+          chat_id: '6943312517',
+          photo: reader.result,
+          caption: `📥 *BUKTI BAYARAN DAMX STORE*\n\n👤 *Nama:* ${name}\n📞 *No Fon:* ${phone}\n📦 *Item:* ${item}\n📆 *Tarikh:* ${new Date().toLocaleString('ms-MY')}\n\n_Terima kasih menyokong Damx Store 💖_`,
+          parse_mode: 'Markdown'
+        };
 
-      fetch('https://api.telegram.org/bot7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc/sendPhoto?chat_id=6943312517', {
-        method: 'POST',
-        body: formData
-      })
-      .then(res => res.json())
-      .then(data => {
-        showNotification('<i class="fas fa-check-circle"></i> Resit berjaya dihantar!');
-      })
-      .catch(err => {
-        showNotification('<i class="fas fa-times-circle"></i> Gagal hantar resit.');
-        console.error(err);
-      });
-    }
+        fetch(`https://api.telegram.org/bot7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc/sendPhoto`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(res => {
+          if (res.ok) {
+            showNotification(`<i class='fas fa-check'></i> Resit berjaya dihantar!`);
+            form.reset();
+          } else {
+            showNotification(`<i class='fas fa-exclamation'></i> Gagal hantar resit.`);
+          }
+        })
+        .catch(() => {
+          showNotification(`<i class='fas fa-exclamation'></i> Ralat sambungan.`);
+        });
+      };
+      reader.readAsDataURL(file);
+    });
   </script></body>
 </html>
