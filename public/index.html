@@ -1,198 +1,181 @@
 <!DOCTYPE html><html lang="ms">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pembayaran DamxStore</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DamxStore Payment</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0d0d0d;
-      --text: #ffffff;
-      --primary: #00ffcc;
-      --secondary: #1e1e1e;
-      --accent: #ff007f;
+      --bg-dark: #0f0f0f;
+      --bg-light: #f5f5f5;
+      --text-dark: #fff;
+      --text-light: #111;
+      --neon: #00ffff;
     }body {
   margin: 0;
   padding: 0;
-  background-color: var(--bg);
-  font-family: 'Segoe UI', sans-serif;
-  color: var(--text);
-  scroll-behavior: smooth;
+  font-family: 'Orbitron', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+  transition: all 0.3s ease-in-out;
+}
+
+.dark-mode {
+  background-color: var(--bg-light);
+  color: var(--text-light);
 }
 
 .container {
   max-width: 500px;
-  margin: 2rem auto;
-  background: var(--secondary);
+  margin: 3rem auto;
+  background: rgba(0,0,0,0.5);
+  border-radius: 15px;
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+  box-shadow: 0 0 15px var(--neon);
 }
 
 h1 {
   text-align: center;
-  color: var(--primary);
+  margin-bottom: 1rem;
+  color: var(--neon);
 }
 
-.qr-section {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.qr-section img {
-  max-width: 100%;
-  border-radius: 10px;
-}
-
-.copy-btn, .download-btn {
-  margin-top: 1rem;
-  padding: 10px 20px;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background-color: var(--accent);
-  color: white;
-}
-
-.upload-section {
+.upload-section, .form-section {
   margin-top: 2rem;
-  text-align: center;
 }
 
 .upload-section input[type="file"] {
-  display: none;
-}
-
-.upload-label {
-  background-color: var(--primary);
-  padding: 10px;
-  border-radius: 8px;
-  display: inline-block;
-  cursor: pointer;
-  color: black;
-  margin-bottom: 1rem;
-}
-
-input[type="text"] {
   width: 100%;
-  padding: 0.7rem;
-  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 2px dashed var(--neon);
+  background-color: transparent;
+  color: var(--text-dark);
+  cursor: pointer;
+}
+
+.form-section input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 1rem;
   border-radius: 8px;
   border: none;
+}
+
+.btn-send {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--neon);
+  color: black;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .notification {
   position: fixed;
-  bottom: 20px;
+  top: 20px;
   right: 20px;
-  background-color: var(--accent);
+  background-color: #111;
+  color: #fff;
   padding: 1rem;
-  border-radius: 10px;
-  color: white;
-  opacity: 0;
-  animation: fadein 0.5s forwards;
+  border-radius: 8px;
+  display: none;
+  z-index: 1000;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-@keyframes fadein {
-  to { opacity: 1; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: var(--neon);
+  color: black;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1><i class="fas fa-credit-card"></i> Pembayaran DamxStore</h1><div class="qr-section">
-  <h2>TnG Payment</h2>
-  <img src="https://files.catbox.moe/dyzyz3.jpg" alt="TnG QR Code" id="qrisImage" />
-  <button class="copy-btn" onclick="copyNumber('01123673845')"><i class="fas fa-copy"></i> Salin Nombor TnG</button>
-  <button class="download-btn" onclick="downloadQRIS()"><i class="fas fa-download"></i> Muat Turun QR</button>
+  <div class="theme-toggle" onclick="toggleTheme()">🌗 Theme</div>  <div class="container">
+    <h1><i class="fas fa-receipt"></i> Upload Bukti Pembayaran</h1><div class="upload-section">
+  <input type="file" accept="image/*" id="receiptImage" onchange="previewImage()" />
+  <img id="preview" src="" style="margin-top:1rem;width:100%;border-radius:10px;display:none"/>
 </div>
 
-<div class="qr-section">
-  <h2>DuitNow</h2>
-  <img src="https://files.catbox.moe/p9ky7m.jpg" alt="DuitNow Logo" style="max-height: 150px;">
-  <button class="copy-btn" onclick="copyNumber('01123673845')"><i class="fas fa-copy"></i> Salin Nombor DuitNow</button>
+<div class="form-section">
+  <input type="text" id="nama" placeholder="Masukkan Nama Anda" required>
+  <input type="text" id="noFon" placeholder="Masukkan No Telefon" required>
+  <input type="text" id="item" placeholder="Nama Item Dibeli" required>
+  <button class="btn-send" onclick="hantarResit()">Hantar Resit</button>
 </div>
 
-<div class="upload-section">
-  <h3><i class="fas fa-upload"></i> Muat Naik Bukti Pembayaran</h3>
-  <label class="upload-label" for="upload">Pilih Gambar Resit</label>
-  <input type="file" id="upload" accept="image/*" onchange="uploadReceipt()">
+  </div>  <div class="notification" id="notif"></div>  <script>
+    function previewImage() {
+      const file = document.getElementById('receiptImage').files[0];
+      const preview = document.getElementById('preview');
+      const reader = new FileReader();
 
-  <input type="text" id="nama" placeholder="Masukkan Nama Anda">
-  <input type="text" id="telefon" placeholder="Masukkan Nombor Telefon">
-  <input type="text" id="item" placeholder="Masukkan Nama Item">
-</div>
+      reader.onloadend = function () {
+        preview.src = reader.result;
+        preview.style.display = 'block';
+      }
 
-  </div>  <div id="notif" class="notification" style="display:none;"></div>  <script>
-    function showNotification(msg) {
-      const notif = document.getElementById("notif");
-      notif.innerHTML = msg;
-      notif.style.display = "block";
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function showNotification(message) {
+      const notif = document.getElementById('notif');
+      notif.innerHTML = message;
+      notif.style.display = 'block';
       setTimeout(() => {
-        notif.style.display = "none";
+        notif.style.display = 'none';
       }, 3000);
     }
 
-    function copyNumber(number) {
-      navigator.clipboard.writeText(number).then(() => {
-        showNotification(`<i class='fas fa-check-circle'></i> Nombor disalin: ${number}`);
-      }).catch(() => {
-        showNotification(`<i class='fas fa-exclamation-circle'></i> Gagal salin nombor. Sila salin manual.`);
-      });
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
     }
 
-    function downloadQRIS() {
-      const qrisImage = document.getElementById('qrisImage');
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.onload = function() {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0);
-        const link = document.createElement('a');
-        link.download = 'Damx-TnG-Payment.png';
-        link.href = canvas.toDataURL();
-        link.click();
-        showNotification(`<i class='fas fa-download'></i> QR dimuat turun!`);
-      };
-      img.src = qrisImage.src;
-    }
+    function hantarResit() {
+      const nama = document.getElementById('nama').value;
+      const noFon = document.getElementById('noFon').value;
+      const item = document.getElementById('item').value;
+      const imageFile = document.getElementById('receiptImage').files[0];
 
-    function uploadReceipt() {
-      const nama = document.getElementById("nama").value;
-      const telefon = document.getElementById("telefon").value;
-      const item = document.getElementById("item").value;
-      const fileInput = document.getElementById("upload");
-      const file = fileInput.files[0];
-      if (!file || !nama || !telefon || !item) {
-        showNotification(`<i class='fas fa-exclamation-circle'></i> Sila lengkapkan semua maklumat dan pilih resit.`);
+      if (!imageFile || !nama || !noFon || !item) {
+        showNotification('<i class="fas fa-exclamation-circle"></i> Sila isi semua maklumat dan upload resit.');
         return;
       }
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const imageData = e.target.result;
-        const token = "7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc";
-        const chatId = "6943312517";
-        const message = `🧾 *BUKTI BAYARAN DAMX STORE*\n\n👤 *Nama:* ${nama}\n📞 *No Fon:* ${telefon}\n📦 *Item:* ${item}\n📆 *Tarikh:* ${new Date().toLocaleString('ms-MY')}\n\n_Terima kasih menyokong Damx Store 💖_`;
 
-        fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
-          method: "POST",
-          body: new FormData(Object.assign(new FormData(), {
-            chat_id: chatId,
-            caption: message,
-            photo: file
-          }))
-        }).then(() => {
-          showNotification(`<i class='fas fa-check'></i> Resit berjaya dihantar ke admin!`);
-        }).catch(() => {
-          showNotification(`<i class='fas fa-times'></i> Gagal hantar resit. Sila cuba semula.`);
-        });
-      };
-      reader.readAsDataURL(file);
+      const formData = new FormData();
+      formData.append('photo', imageFile);
+      formData.append('caption', `🧾 *BUKTI BAYARAN DAMX STORE*\n\n👤 *Nama:* ${nama}\n📞 *No Fon:* ${noFon}\n📦 *Item:* ${item}`);
+
+      fetch('https://api.telegram.org/bot7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc/sendPhoto?chat_id=6943312517', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        showNotification('<i class="fas fa-check-circle"></i> Resit berjaya dihantar!');
+      })
+      .catch(err => {
+        showNotification('<i class="fas fa-times-circle"></i> Gagal hantar resit.');
+        console.error(err);
+      });
     }
   </script></body>
 </html>
