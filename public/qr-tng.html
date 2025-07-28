@@ -32,6 +32,11 @@
       color: black;
       border-radius: 10px;
       cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #00bccc;
     }
 
     h2 {
@@ -50,7 +55,7 @@
 
   <div class="container">
     <h2>QR Touch 'n Go</h2>
-    <img src="https://files.catbox.moe/dpqpc8.jpg" alt="QR TnG" />
+    <img id="qrImage" src="https://files.catbox.moe/dpqpc8.jpg" alt="QR TnG" crossorigin="anonymous" />
     <br />
     <button onclick="downloadQR()">⬇️ Muat Turun QR</button><br><br>
     <button onclick="window.history.back()">🔙 Kembali</button>
@@ -62,12 +67,22 @@
 
   <script>
     function downloadQR() {
-      const link = document.createElement("a");
-      link.href = "https://files.catbox.moe/dpqpc8.jpg";
-      link.download = "qr-tng.jpg";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const imageURL = "https://files.catbox.moe/dpqpc8.jpg";
+      const fileName = "qr-tng.jpg";
+
+      fetch(imageURL)
+        .then(response => response.blob())
+        .then(blob => {
+          const blobURL = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = blobURL;
+          a.download = fileName;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(blobURL);
+        })
+        .catch(() => alert("Gagal memuat turun gambar. Sila cuba lagi."));
     }
   </script>
 
