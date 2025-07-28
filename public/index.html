@@ -2,166 +2,139 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DAMXSTORE Payment</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Pembayaran VVIP - DAMX STORE</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary-color: #00ffc3;
-      --secondary-color: #121212;
-      --text-color: #ffffff;
-      --accent-color: #ff00a6;
-    }body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(145deg, #000000, #0a0a0a);
-  color: var(--text-color);
-  overflow-x: hidden;
-}
-
-header {
-  text-align: center;
-  padding: 2rem;
-  background: rgba(0, 0, 0, 0.4);
-  position: relative;
-}
-
-header h1 {
-  font-size: 2.5rem;
-  color: var(--primary-color);
-  margin-bottom: 0.5rem;
-}
-
-.section {
-  max-width: 800px;
-  margin: auto;
-  padding: 2rem;
-  background-color: rgba(255,255,255,0.05);
-  border-radius: 1rem;
-  box-shadow: 0 0 20px rgba(0, 255, 195, 0.2);
-  margin-bottom: 2rem;
-}
-
-.qr-img {
-  display: block;
-  margin: 0 auto;
-  width: 250px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-}
-
-.btn {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  margin: 1rem 0.5rem;
-  background-color: var(--primary-color);
-  color: #000;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.3s ease;
-}
-
-.btn:hover {
-  background-color: var(--accent-color);
-  color: white;
-}
-
-.upload-section {
-  text-align: center;
-  padding: 1rem;
-}
-
-.form-input {
-  display: block;
-  width: 100%;
-  padding: 1rem;
-  margin-top: 1rem;
-  border-radius: 8px;
-  border: none;
-  background: #1e1e1e;
-  color: var(--text-color);
-}
-
-#notification {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #00ffc3;
-  color: #000;
-  padding: 1rem 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #00ffc3;
-  display: none;
-  z-index: 999;
-}
-
-.social-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.social-buttons a {
-  background: rgba(255,255,255,0.1);
-  padding: 1rem;
-  border-radius: 12px;
-  color: #fff;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.social-buttons a:hover {
-  background: var(--accent-color);
-}
-
-audio {
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  z-index: 99;
-}
-
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(145deg, #000000, #141414);
+      color: #fff;
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      padding: 2rem;
+      background: #1a1a1a;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #00ffcc;
+    }
+    .payment-section {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+      background: #111;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,255,204,0.1);
+      margin-bottom: 2rem;
+    }
+    .payment-section h2 {
+      color: #00ffcc;
+      margin-bottom: 1rem;
+    }
+    .qr-section, .upload-section {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .qr-section img {
+      width: 220px;
+      height: auto;
+      border: 2px solid #00ffcc;
+      border-radius: 12px;
+    }
+    .qr-section button, .copy-btn {
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      background-color: #00ffcc;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .qr-section button:hover {
+      background-color: #00c9a7;
+    }
+    .upload-section input, .upload-section button {
+      margin-top: 1rem;
+    }
+    .notification {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background-color: #1f1f1f;
+      color: #00ffcc;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      display: none;
+      z-index: 999;
+    }
+    .logo-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 2rem 0;
+    }
+    .logo-row img {
+      height: 50px;
+    }
+    footer {
+      background-color: #0a0a0a;
+      padding: 1rem;
+      text-align: center;
+      color: #777;
+    }
   </style>
 </head>
-<body>  <header>
-    <h1><i class="fas fa-wallet"></i> DAMXSTORE PAYMENT</h1>
-    <p>Sila scan kod QR atau salin nombor untuk membuat pembayaran.</p>
-  </header>  <section class="section">
-    <h2><i class="fas fa-qrcode"></i> QR TnG Payment</h2>
-    <img src="https://files.catbox.moe/dyzyz3.jpg" alt="QR TnG" class="qr-img" id="qrisImage">
-    <button class="btn" onclick="downloadQRIS()"><i class="fas fa-download"></i> Muat Turun QR</button>
-  </section>  <section class="section">
-    <h2><i class="fas fa-barcode"></i> DuitNow Payment</h2>
-    <img src="https://files.catbox.moe/p9ky7m.jpg" alt="Logo DuitNow" class="qr-img">
-    <p>No. DuitNow: <strong id="duitNow">012-3456789</strong></p>
-    <button class="btn" onclick="copyNumber('012-3456789')"><i class="fas fa-copy"></i> Salin Nombor</button>
-  </section>  <section class="section upload-section">
-    <h2><i class="fas fa-upload"></i> Muat Naik Resit</h2>
-    <input type="text" class="form-input" id="nama" placeholder="Nama Anda">
-    <input type="text" class="form-input" id="item" placeholder="Item Dibeli">
-    <input type="file" class="form-input" id="gambar">
-    <button class="btn" onclick="hantarTelegram()"><i class="fas fa-paper-plane"></i> Hantar ke Admin</button>
-  </section>  <div class="social-buttons">
-    <a href="https://wa.me/60123456789" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-    <a href="https://t.me/username" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
-  </div>  <div id="notification"></div>  <audio autoplay loop>
-    <source src="https://files.catbox.moe/5xj1dj.mp3" type="audio/mpeg">
-  </audio>  <script>
-    function copyNumber(number) {
-      navigator.clipboard.writeText(number).then(() => {
-        showNotification(`<i class='fas fa-check-circle'></i> Nombor disalin: ${number}`);
-      }).catch(() => {
-        showNotification(`<i class='fas fa-exclamation-circle'></i> Gagal salin nombor.`);
-      });
+<body>
+  <header>
+    <h1><i class="fas fa-money-bill-wave"></i> Pembayaran VVIP - DAMX STORE</h1>
+  </header>  <section class="payment-section">
+    <h2>QR Touch 'n Go</h2>
+    <div class="qr-section">
+      <img id="qrisImage" src="https://files.catbox.moe/dyzyz3.jpg" alt="QR TNG">
+      <div class="logo-row">
+        <img src="https://files.catbox.moe/dyzyz3.jpg" alt="TNG Logo">
+        <img src="https://files.catbox.moe/p9ky7m.jpg" alt="DuitNow Logo">
+      </div>
+      <button onclick="downloadQRIS()">Muat Turun QR TNG</button>
+    </div><h2 style="margin-top: 3rem;">Bayaran DuitNow</h2>
+<div class="qr-section">
+  <p><strong>Nombor DuitNow:</strong> <span id="duitnowNumber">01122334455</span></p>
+  <button class="copy-btn" onclick="copyNumber('01122334455')">Salin Nombor</button>
+</div>
+
+<div class="upload-section">
+  <h2>Muat Naik Bukti Pembayaran</h2>
+  <input type="text" id="itemName" placeholder="Masukkan Nama Item" style="padding: 0.5rem; border-radius: 8px; width: 100%; max-width: 400px;">
+  <br>
+  <input type="file" id="receiptUpload" accept="image/*" style="margin-top: 1rem;">
+  <br>
+  <button onclick="sendToTelegram()" style="margin-top: 1rem;">Hantar ke Admin</button>
+</div>
+
+  </section>  <div class="notification" id="notification"></div>  <footer>
+    <p>From DAMX STORE &copy; 2025</p>
+  </footer>  <script>
+    function showNotification(message) {
+      const notif = document.getElementById('notification');
+      notif.innerHTML = message;
+      notif.style.display = 'block';
+      setTimeout(() => notif.style.display = 'none', 3000);
     }
 
-    function showNotification(msg) {
-      const note = document.getElementById("notification");
-      note.innerHTML = msg;
-      note.style.display = "block";
-      setTimeout(() => note.style.display = "none", 3000);
+    function copyNumber(number) {
+      navigator.clipboard.writeText(number).then(() => {
+        showNotification(`<i class="fas fa-check-circle"></i> Nombor disalin: ${number}`);
+      }).catch(() => {
+        showNotification(`<i class="fas fa-exclamation-circle"></i> Gagal salin. Sila salin secara manual: ${number}`);
+      });
     }
 
     function downloadQRIS() {
@@ -169,46 +142,58 @@ audio {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       const img = new Image();
+
       img.crossOrigin = 'anonymous';
-      img.onload = function () {
+      img.onload = function() {
         canvas.width = img.width;
         canvas.height = img.height;
         ctx.drawImage(img, 0, 0);
+
         const link = document.createElement('a');
         link.download = 'Damx-TnG-Payment.png';
         link.href = canvas.toDataURL();
         link.click();
-        showNotification(`<i class='fas fa-download'></i> TnG QR berjaya dimuat turun!`);
+
+        showNotification(`<i class="fas fa-download"></i> QR dimuat turun!`);
       };
+
       img.src = qrisImage.src;
     }
 
-    function hantarTelegram() {
-      const nama = document.getElementById('nama').value;
-      const item = document.getElementById('item').value;
-      const gambar = document.getElementById('gambar').files[0];
+    function sendToTelegram() {
+      const token = '7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc';
+      const chatId = '6943312517';
+      const fileInput = document.getElementById('receiptUpload');
+      const itemName = document.getElementById('itemName').value || 'Tiada Nama';
 
-      if (!nama || !item || !gambar) {
-        showNotification(`<i class='fas fa-exclamation-circle'></i> Sila lengkapkan semua maklumat.`);
+      if (!fileInput.files.length) {
+        showNotification('Sila pilih fail terlebih dahulu.');
         return;
       }
 
+      const file = fileInput.files[0];
       const formData = new FormData();
-      formData.append("chat_id", "6943312517");
-      formData.append("caption", `🧾 *BUKTI BAYARAN DAMX STORE*\n\n👤 *Nama:* ${nama}\n📦 *Item:* ${item}\n📆 Tarikh: ${new Date().toLocaleString('ms-MY')}\n\n_Terima kasih menyokong Damx Store 💖_`);
-      formData.append("photo", gambar);
+      formData.append('chat_id', chatId);
+      formData.append('caption', `🧾 *BUKTI BAYARAN DAMX STORE*
 
-      fetch("https://api.telegram.org/bot7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc/sendPhoto", {
-        method: "POST",
+📦 *Item:* ${itemName}
+📅 Tarikh: ${new Date().toLocaleString('ms-MY')}
+
+_Terima kasih menyokong Damx Store 💖_`);
+      formData.append('photo', file);
+
+      fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
+        method: 'POST',
         body: formData
       })
-        .then(res => res.json())
-        .then(data => {
-          showNotification(`<i class='fas fa-check-circle'></i> Resit berjaya dihantar ke admin!`);
-        })
-        .catch(err => {
-          showNotification(`<i class='fas fa-exclamation-circle'></i> Gagal hantar resit. Cuba lagi.`);
-        });
+      .then(response => {
+        if (response.ok) {
+          showNotification('<i class="fas fa-paper-plane"></i> Bukti dihantar ke admin!');
+        } else {
+          showNotification('❌ Gagal menghantar ke Telegram.');
+        }
+      })
+      .catch(() => showNotification('❌ Ralat rangkaian.'));
     }
   </script></body>
 </html>
