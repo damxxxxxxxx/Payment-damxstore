@@ -1,219 +1,173 @@
-<!DOCTYPE html>
-<html lang="ms">
+<!DOCTYPE html><html lang="ms">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DAMX STORE PAYMENT</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pembayaran DamxStore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
-      color: #fff;
-    }
+    :root {
+      --bg-color: #0f0f0f;
+      --card-color: #1a1a1a;
+      --text-color: #fff;
+      --accent-color: #00ffcc;
+      --button-bg: #222;
+      --button-hover: #333;
+    }* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    header {
-      background-color: #0e0e0e;
-      padding: 1.2rem;
-      text-align: center;
-      font-size: 1.6rem;
-      font-weight: bold;
-      color: #00ffcc;
-      box-shadow: 0 0 10px #00ffcc;
-    }
+body {
+  background-color: var(--bg-color);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
+h1 {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
 
-    h2 {
-      color: #00ffcc;
-    }
+.card-container {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-    .section {
-      background-color: #141414;
-      padding: 20px;
-      margin-bottom: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #00ffcc44;
-    }
+.card {
+  background: var(--card-color);
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+  text-align: center;
+  width: 250px;
+}
 
-    .qris-section img {
-      width: 240px;
-      height: auto;
-      border-radius: 8px;
-      margin-bottom: 10px;
-    }
+.card img.logo {
+  width: 100px;
+  margin-bottom: 1rem;
+}
 
-    button {
-      background-color: #00ffcc;
-      color: #000;
-      border: none;
-      padding: 10px 18px;
-      margin: 5px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
+.card p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
 
-    button:hover {
-      background-color: #00ccaa;
-    }
+.btn {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border: none;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
 
-    input[type="file"], input[type="text"] {
-      background-color: #1c1c1c;
-      color: white;
-      border: 1px solid #444;
-      padding: 10px;
-      width: 100%;
-      border-radius: 6px;
-      margin-bottom: 10px;
-    }
+.btn:hover {
+  background-color: var(--button-hover);
+}
 
-    #notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #0e0e0e;
-      color: #00ffcc;
-      padding: 12px 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 12px #00ffcc;
-      display: none;
-      z-index: 1000;
-    }
+.upload-section {
+  margin-top: 3rem;
+  background: var(--card-color);
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
 
-    .qris-label {
-      font-weight: bold;
-      margin-top: 10px;
-    }
+input, textarea {
+  width: 90%;
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #555;
+  background: #121212;
+  color: white;
+}
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      color: #888;
-    }
+.notification {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #1f1f1f;
+  color: white;
+  display: none;
+}
 
-    .logo {
-      width: 120px;
-      margin-top: 10px;
-    }
   </style>
 </head>
 <body>
-  <header>DAMX STORE PAYMENT</header>
-
-  <div class="container">
-
-    <div class="section qris-section">
-      <h2><i class="fas fa-wallet"></i> Bayar Melalui TnG</h2>
-      <img src="https://files.catbox.moe/dyzyz3.jpg" alt="QR TnG" id="qrisImageTng" />
-      <p class="qris-label">Nombor TnG: <span id="tngNumber">01124351320</span></p>
-      <button onclick="copyNumber('01124351320')"><i class="fas fa-copy"></i> Salin Nombor</button>
-      <button onclick="downloadQRIS('tng')"><i class="fas fa-download"></i> Muat Turun QR</button>
+  <h1><i class="fas fa-money-bill-wave"></i> Pembayaran DamxStore</h1>  <div class="card-container">
+    <div class="card">
+      <img src="https://files.catbox.moe/dyzyz3.jpg" class="logo" alt="Logo TnG">
+      <p id="tng">01170306698</p>
+      <button class="btn" onclick="copyText('tng')">📋 Salin Nombor</button>
+      <a href="https://files.catbox.moe/dyzyz3.jpg" download class="btn">⬇️ Muat Turun QR</a>
     </div>
-
-    <div class="section qris-section">
-      <h2><i class="fas fa-money-check"></i> Bayar Melalui DuitNow</h2>
-      <img src="https://files.catbox.moe/uye5pn.jpg" alt="QR DuitNow" id="qrisImageDuitnow" />
-      <p class="qris-label">Nombor DuitNow: <span id="duitnowNumber">120331861205</span></p>
-      <button onclick="copyNumber('120331861205')"><i class="fas fa-copy"></i> Salin Nombor</button>
-      <button onclick="downloadQRIS('duitnow')"><i class="fas fa-download"></i> Muat Turun QR</button>
-      <br><img src="https://files.catbox.moe/p9ky7m.jpg" alt="Logo DuitNow" class="logo"/>
+    <div class="card">
+      <img src="https://files.catbox.moe/p9ky7m.jpg" class="logo" alt="Logo DuitNow">
+      <p id="duitnow">120331861205</p>
+      <button class="btn" onclick="copyText('duitnow')">📋 Salin Nombor</button>
+      <a href="https://files.catbox.moe/p9ky7m.jpg" download class="btn">⬇️ Muat Turun QR</a>
     </div>
-
-    <div class="section">
-      <h2><i class="fas fa-upload"></i> Upload Bukti Pembayaran</h2>
-      <input type="text" id="nama" placeholder="Masukkan Nama Anda" required />
-      <input type="text" id="item" placeholder="Nama Item yang Dibeli" required />
-      <input type="file" id="resit" accept="image/*" required />
-      <button onclick="uploadResit()">📤 Hantar ke Admin</button>
-    </div>
-
-    <div id="notification"></div>
-
-  </div>
-
-  <footer>
-    ❤️ Terima kasih kerana menyokong <strong>DAMX STORE</strong><br/>
-    From DAMX STORE
-  </footer>
-
-  <script>
-    function showNotification(message) {
-      const notif = document.getElementById('notification');
-      notif.innerHTML = message;
-      notif.style.display = 'block';
-      setTimeout(() => {
-        notif.style.display = 'none';
-      }, 3000);
-    }
-
-    function copyNumber(number) {
-      navigator.clipboard.writeText(number).then(() => {
-        showNotification(`<i class="fas fa-check-circle"></i> Nombor disalin: ${number}`);
-      }).catch(() => {
-        showNotification(`<i class="fas fa-exclamation-circle"></i> Gagal salin nombor.`);
+  </div>  <div class="upload-section">
+    <h2>📤 Muat Naik Bukti Pembayaran</h2>
+    <input type="text" id="name" placeholder="Masukkan Nama Anda">
+    <input type="text" id="item" placeholder="Masukkan Nama Item">
+    <input type="text" id="amount" placeholder="Masukkan Jumlah (RM)">
+    <input type="file" id="receipt">
+    <button class="btn" onclick="submitReceipt()">📨 Hantar ke Admin</button>
+    <div id="notify" class="notification"></div>
+  </div>  <script>
+    function copyText(id) {
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        showMessage("Nombor disalin: " + text);
       });
     }
 
-    function downloadQRIS(type) {
-      const imgId = type === 'tng' ? 'qrisImageTng' : 'qrisImageDuitnow';
-      const img = document.getElementById(imgId);
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      const image = new Image();
-      image.crossOrigin = 'anonymous';
-
-      image.onload = function() {
-        canvas.width = image.width;
-        canvas.height = image.height;
-        ctx.drawImage(image, 0, 0);
-        const link = document.createElement('a');
-        link.download = `DAMX-QR-${type}.png`;
-        link.href = canvas.toDataURL();
-        link.click();
-        showNotification(`<i class="fas fa-download"></i> QR ${type.toUpperCase()} berjaya dimuat turun!`);
-      };
-
-      image.src = img.src;
+    function showMessage(msg) {
+      const notify = document.getElementById('notify');
+      notify.innerHTML = msg;
+      notify.style.display = 'block';
+      setTimeout(() => notify.style.display = 'none', 3000);
     }
 
-    function uploadResit() {
-      const nama = document.getElementById('nama').value.trim();
-      const item = document.getElementById('item').value.trim();
-      const fileInput = document.getElementById('resit');
-      const file = fileInput.files[0];
+    async function submitReceipt() {
+      const name = document.getElementById('name').value;
+      const item = document.getElementById('item').value;
+      const amount = document.getElementById('amount').value;
+      const file = document.getElementById('receipt').files[0];
+      if (!name || !item || !amount || !file) return showMessage("Sila lengkapkan semua maklumat dan pilih fail.");
 
-      if (!nama || !item || !file) {
-        showNotification(`<i class="fas fa-exclamation-circle"></i> Sila lengkapkan semua maklumat.`);
-        return;
+      const formData = new FormData();
+      formData.append("chat_id", "6943312517");
+      formData.append("caption", `🧾 *BUKTI BAYARAN DAMX STORE*\n\n👤 *Nama:* ${name}\n📦 *Item:* ${item}\n💸 *Jumlah:* RM ${amount}\n📆 *Tarikh:* ${new Date().toLocaleString('ms-MY')}\n\n_Terima kasih menyokong Damx Store 💖_`);
+      formData.append("photo", file);
+
+      const res = await fetch("https://api.telegram.org/bot7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc/sendPhoto", {
+        method: "POST",
+        body: formData
+      });
+
+      if (res.ok) {
+        showMessage("✅ Resit berjaya dihantar ke admin!");
+      } else {
+        showMessage("❌ Gagal menghantar resit.");
       }
-
-      const reader = new FileReader();
-      reader.onload = function() {
-        const base64Image = reader.result.split(',')[1];
-
-        fetch(`https://api.telegram.org/bot7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc/sendPhoto`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            chat_id: '6943312517',
-            photo: `data:image/png;base64,${base64Image}`,
-            caption: `🧾 *BUKTI BAYARAN DAMX STORE*\n\n👤 *Nama:* ${nama}\n📦 *Item:* ${item}\n📆 *Tarikh:* ${new Date().toLocaleString('ms-MY')}\n\n_Terima kasih menyokong Damx Store 💖_`,
-            parse_mode: 'Markdown'
-          })
-        })
-        .then(res => res.ok ? showNotification('📤 Bukti resit berjaya dihantar ke admin!') : showNotification('❌ Gagal hantar resit.'))
-        .catch(() => showNotification('❌ Ralat sambungan.'));
-      };
-      reader.readAsDataURL(file);
     }
-  </script>
-</body>
+  </script></body>
 </html>
