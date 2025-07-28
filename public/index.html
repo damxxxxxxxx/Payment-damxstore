@@ -1,173 +1,166 @@
-<!DOCTYPE html><html lang="ms">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pembayaran DamxStore</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!DOCTYPE html><html lang="ms"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pembayaran - DamxStore</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
-      --bg-color: #0f0f0f;
-      --card-color: #1a1a1a;
-      --text-color: #fff;
-      --accent-color: #00ffcc;
-      --button-bg: #222;
-      --button-hover: #333;
+      --primary: #ff0055;
+      --background: #0d0d0d;
+      --card-bg: #1a1a1a;
+      --text: #fff;
+      --btn-bg: #ff0055;
+      --btn-hover: #cc0044;
     }* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-  background-color: var(--bg-color);
-  font-family: 'Inter', sans-serif;
-  color: var(--text-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background: var(--background);
+  color: var(--text);
   padding: 2rem;
 }
 
 h1 {
+  text-align: center;
   font-size: 2rem;
-  color: var(--accent-color);
   margin-bottom: 1rem;
+  color: var(--primary);
 }
 
-.card-container {
+.cards {
   display: flex;
-  gap: 2rem;
   flex-wrap: wrap;
+  gap: 2rem;
   justify-content: center;
 }
 
 .card {
-  background: var(--card-color);
-  padding: 1rem;
+  background: var(--card-bg);
+  padding: 1.5rem;
   border-radius: 1rem;
-  box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+  width: 300px;
+  box-shadow: 0 4px 12px rgba(255, 0, 85, 0.3);
   text-align: center;
-  width: 250px;
 }
 
 .card img.logo {
-  width: 100px;
+  max-width: 80px;
+  margin-bottom: 1rem;
+}
+
+.card img.qr {
+  width: 100%;
+  border-radius: 0.5rem;
   margin-bottom: 1rem;
 }
 
 .card p {
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-bottom: 0.5rem;
+  color: #ccc;
 }
 
 .btn {
   display: block;
-  width: 100%;
-  margin: 0.5rem 0;
-  padding: 0.5rem;
+  margin: 0.5rem auto;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--btn-bg);
   border: none;
-  background-color: var(--button-bg);
-  color: var(--text-color);
   border-radius: 0.5rem;
+  color: #fff;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
+  font-weight: bold;
 }
 
 .btn:hover {
-  background-color: var(--button-hover);
+  background-color: var(--btn-hover);
 }
 
 .upload-section {
   margin-top: 3rem;
-  background: var(--card-color);
-  padding: 1rem;
-  border-radius: 1rem;
-  width: 100%;
-  max-width: 500px;
   text-align: center;
 }
 
-input, textarea {
-  width: 90%;
-  margin: 0.5rem auto;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid #555;
-  background: #121212;
-  color: white;
-}
-
-.notification {
+.upload-section input {
   margin-top: 1rem;
-  padding: 0.75rem;
-  border-radius: 8px;
-  background: #1f1f1f;
-  color: white;
-  display: none;
+  margin-bottom: 1rem;
 }
 
   </style>
-</head>
-<body>
-  <h1><i class="fas fa-money-bill-wave"></i> Pembayaran DamxStore</h1>  <div class="card-container">
+</head><body>
+  <h1>Pembayaran DamxStore</h1>
+  <div class="cards">
+    <!-- TnG Card -->
     <div class="card">
-      <img src="https://files.catbox.moe/dyzyz3.jpg" class="logo" alt="Logo TnG">
-      <p id="tng">01170306698</p>
-      <button class="btn" onclick="copyText('tng')">📋 Salin Nombor</button>
-      <a href="https://files.catbox.moe/dyzyz3.jpg" download class="btn">⬇️ Muat Turun QR</a>
-    </div>
-    <div class="card">
-      <img src="https://files.catbox.moe/p9ky7m.jpg" class="logo" alt="Logo DuitNow">
-      <p id="duitnow">120331861205</p>
-      <button class="btn" onclick="copyText('duitnow')">📋 Salin Nombor</button>
-      <a href="https://files.catbox.moe/p9ky7m.jpg" download class="btn">⬇️ Muat Turun QR</a>
-    </div>
+      <img src="https://files.catbox.moe/dyzyz3.jpg" alt="QR TnG" class="qr">
+      <p id="tngNumber">01110574393</p>
+      <button class="btn" onclick="copyNumber('01110574393')">📋 Salin Nombor</button>
+      <a href="https://files.catbox.moe/dyzyz3.jpg" class="btn" download>⬇️ Muat Turun QR</a>
+    </div><!-- DuitNow Card -->
+<div class="card">
+  <img src="https://files.catbox.moe/p9ky7m.jpg" alt="QR DuitNow" class="qr">
+  <p id="duitnowNumber">120331861205</p>
+  <button class="btn" onclick="copyNumber('120331861205')">📋 Salin Nombor</button>
+  <a href="https://files.catbox.moe/p9ky7m.jpg" class="btn" download>⬇️ Muat Turun QR</a>
+</div>
+
   </div>  <div class="upload-section">
-    <h2>📤 Muat Naik Bukti Pembayaran</h2>
-    <input type="text" id="name" placeholder="Masukkan Nama Anda">
-    <input type="text" id="item" placeholder="Masukkan Nama Item">
-    <input type="text" id="amount" placeholder="Masukkan Jumlah (RM)">
-    <input type="file" id="receipt">
-    <button class="btn" onclick="submitReceipt()">📨 Hantar ke Admin</button>
-    <div id="notify" class="notification"></div>
+    <h2>Upload Bukti Pembayaran</h2>
+    <form id="paymentForm">
+      <input type="text" name="nama" placeholder="Masukkan nama anda" required><br>
+      <input type="text" name="item" placeholder="Masukkan nama item" required><br>
+      <input type="number" name="jumlah" placeholder="Jumlah bayaran (RM)" required><br>
+      <input type="file" name="resit" id="resit" accept="image/*" required><br>
+      <button type="submit" class="btn">📤 Hantar Resit</button>
+    </form>
   </div>  <script>
-    function copyText(id) {
-      const text = document.getElementById(id).innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        showMessage("Nombor disalin: " + text);
-      });
-    }
+    const form = document.getElementById("paymentForm");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    function showMessage(msg) {
-      const notify = document.getElementById('notify');
-      notify.innerHTML = msg;
-      notify.style.display = 'block';
-      setTimeout(() => notify.style.display = 'none', 3000);
-    }
+      const nama = form.nama.value;
+      const item = form.item.value;
+      const jumlah = form.jumlah.value;
+      const resit = document.getElementById("resit").files[0];
 
-    async function submitReceipt() {
-      const name = document.getElementById('name').value;
-      const item = document.getElementById('item').value;
-      const amount = document.getElementById('amount').value;
-      const file = document.getElementById('receipt').files[0];
-      if (!name || !item || !amount || !file) return showMessage("Sila lengkapkan semua maklumat dan pilih fail.");
+      if (!resit) return alert("Sila pilih gambar resit!");
+
+      const token = "7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc";
+      const chatId = "6943312517";
+
+      const caption = `🧾 *BUKTI BAYARAN DAMX STORE*\n\n👤 *Nama:* ${nama}\n📦 *Item:* ${item}\n💸 *Jumlah:* RM ${jumlah}\n📆 *Tarikh:* ${new Date().toLocaleString("ms-MY")}\n\n_Terima kasih menyokong Damx Store 💖_`;
 
       const formData = new FormData();
-      formData.append("chat_id", "6943312517");
-      formData.append("caption", `🧾 *BUKTI BAYARAN DAMX STORE*\n\n👤 *Nama:* ${name}\n📦 *Item:* ${item}\n💸 *Jumlah:* RM ${amount}\n📆 *Tarikh:* ${new Date().toLocaleString('ms-MY')}\n\n_Terima kasih menyokong Damx Store 💖_`);
-      formData.append("photo", file);
+      formData.append("chat_id", chatId);
+      formData.append("caption", caption);
+      formData.append("photo", resit);
 
-      const res = await fetch("https://api.telegram.org/bot7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc/sendPhoto", {
+      await fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
         method: "POST",
         body: formData
+      }).then(res => {
+        if (res.ok) {
+          alert("✅ Resit berjaya dihantar ke admin!");
+          form.reset();
+        } else {
+          alert("❌ Gagal hantar resit. Sila cuba semula.");
+        }
+      }).catch(() => {
+        alert("❌ Ralat berlaku semasa penghantaran.");
       });
+    });
 
-      if (res.ok) {
-        showMessage("✅ Resit berjaya dihantar ke admin!");
-      } else {
-        showMessage("❌ Gagal menghantar resit.");
-      }
+    function copyNumber(number) {
+      navigator.clipboard.writeText(number).then(() => {
+        alert(`✔️ Nombor ${number} disalin!`);
+      }).catch(() => {
+        alert(`❌ Gagal salin. Sila salin manual: ${number}`);
+      });
     }
-  </script></body>
-</html>
+  </script></body></html>
