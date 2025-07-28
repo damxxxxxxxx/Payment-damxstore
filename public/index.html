@@ -3,197 +3,217 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DAMXSTORE - Pembayaran</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>DAMX STORE PAYMENT</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
-    /* Global Style */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      color: #fff;
+      margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      padding: 20px;
-      min-height: 100vh;
-      line-height: 1.6;
+      background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
+      color: #fff;
     }
 
-    h1, h2 {
+    header {
+      background-color: #0e0e0e;
+      padding: 1.2rem;
       text-align: center;
-      color: #00f0ff;
-      margin-bottom: 10px;
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #00ffcc;
+      box-shadow: 0 0 10px #00ffcc;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #00ffcc;
     }
 
     .section {
-      margin: 40px 0;
+      background-color: #141414;
       padding: 20px;
-      background-color: rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      box-shadow: 0 0 15px #00f0ff33;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ffcc44;
     }
 
-    img.qr {
-      display: block;
-      margin: 0 auto;
-      max-width: 240px;
-      border-radius: 12px;
-      border: 2px solid #00f0ff;
-    }
-
-    .button-group {
-      text-align: center;
-      margin-top: 20px;
+    .qris-section img {
+      width: 240px;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 10px;
     }
 
     button {
-      background: #00f0ff;
-      border: none;
-      padding: 12px 24px;
-      margin: 10px;
-      border-radius: 8px;
-      font-weight: bold;
+      background-color: #00ffcc;
       color: #000;
+      border: none;
+      padding: 10px 18px;
+      margin: 5px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: 0.3s;
+      font-weight: bold;
+      transition: background 0.3s;
     }
 
     button:hover {
-      background: #0ff;
-      transform: scale(1.05);
+      background-color: #00ccaa;
     }
 
-    .notification {
+    input[type="file"], input[type="text"] {
+      background-color: #1c1c1c;
+      color: white;
+      border: 1px solid #444;
+      padding: 10px;
+      width: 100%;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    #notification {
       position: fixed;
       top: 20px;
       right: 20px;
-      background: #111;
-      color: #0ff;
-      padding: 10px 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #0ff;
+      background: #0e0e0e;
+      color: #00ffcc;
+      padding: 12px 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #00ffcc;
       display: none;
-      z-index: 9999;
-      font-size: 14px;
-      opacity: 0;
-      transition: opacity 0.5s ease;
+      z-index: 1000;
     }
 
-    .notification.show {
-      display: block;
-      opacity: 1;
-    }
-
-    .upload-box {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    input[type="file"] {
+    .qris-label {
+      font-weight: bold;
       margin-top: 10px;
-      padding: 10px;
-      background: #000;
-      border: 1px solid #00f0ff;
-      border-radius: 8px;
-      color: #0ff;
     }
 
-    .footer {
+    footer {
       text-align: center;
-      margin-top: 50px;
+      padding: 20px;
       font-size: 14px;
-      color: #ccc;
+      color: #888;
     }
 
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
-    }
-
-    .animate-float {
-      animation: float 3s ease-in-out infinite;
+    .logo {
+      width: 120px;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
+  <header>DAMX STORE PAYMENT</header>
 
-  <h1 class="animate-float">💸 Pembayaran DAMXSTORE 💸</h1>
+  <div class="container">
 
-  <!-- QR TnG -->
-  <div class="section">
-    <h2><i class="fas fa-qrcode"></i> Touch 'n Go QR</h2>
-    <img src="https://files.catbox.moe/dyzyz3.jpg" alt="QR TnG" class="qr" id="tngQR">
-    <div class="button-group">
-      <button onclick="copyNumber('120331861205')">📋 Salin No Akaun TnG</button>
-      <button onclick="downloadQRIS('tngQR', 'Damx-TnG.png')">⬇️ Muat Turun QR</button>
+    <div class="section qris-section">
+      <h2><i class="fas fa-wallet"></i> Bayar Melalui TnG</h2>
+      <img src="https://files.catbox.moe/dyzyz3.jpg" alt="QR TnG" id="qrisImageTng" />
+      <p class="qris-label">Nombor TnG: <span id="tngNumber">01124351320</span></p>
+      <button onclick="copyNumber('01124351320')"><i class="fas fa-copy"></i> Salin Nombor</button>
+      <button onclick="downloadQRIS('tng')"><i class="fas fa-download"></i> Muat Turun QR</button>
     </div>
-  </div>
 
-  <!-- QR DuitNow -->
-  <div class="section">
-    <h2><i class="fas fa-qrcode"></i> DuitNow QR</h2>
-    <img src="https://files.catbox.moe/uye5pn.jpg" alt="QR DuitNow" class="qr" id="duitnowQR">
-    <div class="button-group">
-      <button onclick="copyNumber('0111050504')">📋 Salin No Akaun DuitNow</button>
-      <button onclick="downloadQRIS('duitnowQR', 'Damx-DuitNow.png')">⬇️ Muat Turun QR</button>
+    <div class="section qris-section">
+      <h2><i class="fas fa-money-check"></i> Bayar Melalui DuitNow</h2>
+      <img src="https://files.catbox.moe/uye5pn.jpg" alt="QR DuitNow" id="qrisImageDuitnow" />
+      <p class="qris-label">Nombor DuitNow: <span id="duitnowNumber">120331861205</span></p>
+      <button onclick="copyNumber('120331861205')"><i class="fas fa-copy"></i> Salin Nombor</button>
+      <button onclick="downloadQRIS('duitnow')"><i class="fas fa-download"></i> Muat Turun QR</button>
+      <br><img src="https://files.catbox.moe/p9ky7m.jpg" alt="Logo DuitNow" class="logo"/>
     </div>
+
+    <div class="section">
+      <h2><i class="fas fa-upload"></i> Upload Bukti Pembayaran</h2>
+      <input type="text" id="nama" placeholder="Masukkan Nama Anda" required />
+      <input type="text" id="item" placeholder="Nama Item yang Dibeli" required />
+      <input type="file" id="resit" accept="image/*" required />
+      <button onclick="uploadResit()">📤 Hantar ke Admin</button>
+    </div>
+
+    <div id="notification"></div>
+
   </div>
 
-  <!-- Upload Resit -->
-  <div class="section upload-box">
-    <h2><i class="fas fa-upload"></i> Muat Naik Bukti Bayaran</h2>
-    <p>Sila muat naik gambar resit pembayaran anda di sini:</p>
-    <input type="file" accept="image/*" id="uploadResit" onchange="showNotification('✅ Resit dimuat naik. Pastikan anda hantar ke admin.')">
-  </div>
+  <footer>
+    ❤️ Terima kasih kerana menyokong <strong>DAMX STORE</strong><br/>
+    From DAMX STORE
+  </footer>
 
-  <!-- Notification -->
-  <div id="notification" class="notification"></div>
-
-  <!-- Footer -->
-  <div class="footer">
-    &copy; 2025 DAMXSTORE | Terima kasih kerana menyokong 💖
-  </div>
-
-  <!-- JS Script -->
   <script>
+    function showNotification(message) {
+      const notif = document.getElementById('notification');
+      notif.innerHTML = message;
+      notif.style.display = 'block';
+      setTimeout(() => {
+        notif.style.display = 'none';
+      }, 3000);
+    }
+
     function copyNumber(number) {
       navigator.clipboard.writeText(number).then(() => {
         showNotification(`<i class="fas fa-check-circle"></i> Nombor disalin: ${number}`);
       }).catch(() => {
-        showNotification(`<i class="fas fa-exclamation-circle"></i> Gagal salin. Sila salin manual: ${number}`);
+        showNotification(`<i class="fas fa-exclamation-circle"></i> Gagal salin nombor.`);
       });
     }
 
-    function downloadQRIS(imgId, filename) {
-      const qrisImage = document.getElementById(imgId);
+    function downloadQRIS(type) {
+      const imgId = type === 'tng' ? 'qrisImageTng' : 'qrisImageDuitnow';
+      const img = document.getElementById(imgId);
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-      const img = new Image();
+      const image = new Image();
+      image.crossOrigin = 'anonymous';
 
-      img.crossOrigin = 'anonymous';
-      img.onload = function () {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0);
+      image.onload = function() {
+        canvas.width = image.width;
+        canvas.height = image.height;
+        ctx.drawImage(image, 0, 0);
         const link = document.createElement('a');
-        link.download = filename;
+        link.download = `DAMX-QR-${type}.png`;
         link.href = canvas.toDataURL();
         link.click();
-        showNotification(`<i class="fas fa-download"></i> ${filename} dimuat turun!`);
+        showNotification(`<i class="fas fa-download"></i> QR ${type.toUpperCase()} berjaya dimuat turun!`);
       };
 
-      img.src = qrisImage.src;
+      image.src = img.src;
     }
 
-    function showNotification(message) {
-      const box = document.getElementById('notification');
-      box.innerHTML = message;
-      box.classList.add('show');
+    function uploadResit() {
+      const nama = document.getElementById('nama').value.trim();
+      const item = document.getElementById('item').value.trim();
+      const fileInput = document.getElementById('resit');
+      const file = fileInput.files[0];
 
-      setTimeout(() => {
-        box.classList.remove('show');
-      }, 3000);
+      if (!nama || !item || !file) {
+        showNotification(`<i class="fas fa-exclamation-circle"></i> Sila lengkapkan semua maklumat.`);
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function() {
+        const base64Image = reader.result.split(',')[1];
+
+        fetch(`https://api.telegram.org/bot7625259435:AAGJPd_zD_v3d252B94qfAqJ-r1wgd_1Vjc/sendPhoto`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: '6943312517',
+            photo: `data:image/png;base64,${base64Image}`,
+            caption: `🧾 *BUKTI BAYARAN DAMX STORE*\n\n👤 *Nama:* ${nama}\n📦 *Item:* ${item}\n📆 *Tarikh:* ${new Date().toLocaleString('ms-MY')}\n\n_Terima kasih menyokong Damx Store 💖_`,
+            parse_mode: 'Markdown'
+          })
+        })
+        .then(res => res.ok ? showNotification('📤 Bukti resit berjaya dihantar ke admin!') : showNotification('❌ Gagal hantar resit.'))
+        .catch(() => showNotification('❌ Ralat sambungan.'));
+      };
+      reader.readAsDataURL(file);
     }
   </script>
-
 </body>
 </html>
